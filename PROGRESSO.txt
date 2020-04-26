@@ -1,0 +1,7 @@
+MODELOS:
+Categoria
+Conta
+Movimento
+User->Admin;UserNormal
+
+
