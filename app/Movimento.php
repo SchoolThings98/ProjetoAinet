@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Movimento extends Model
 {
     
-
+	//Use SoftDelete;
 	public function conta(){
 		return $this->belongTo('App\Conta');
 	}
