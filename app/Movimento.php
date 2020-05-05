@@ -12,8 +12,14 @@ class Movimento extends Model
 		return $this->belongTo('App\Conta');
 	}
 
+
+	//este caso e diferente pois para funcionar como indicado na tebela
+	// de relacionamentos trocamos a ordem e o em vez de o movimeto ter
+	//hasOne('App\Categoria') fica belongsTo('App\Categoria') e o 
+	//categoria fica com o hasMany;
+
     public function categoria(){
 
-    	return $this->hasOne('App\Categoria');
+    	return $this->belongsTo('App\Categoria');
     }
 }
