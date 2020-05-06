@@ -18,7 +18,7 @@
         <h1>Gestor Finanças</h1>
 
         <div class="avatar-area">
-            <span class="name-user">User Anonimo</span>
+            <span>User Anonimo</span>
            <!-- <img src="/img/default_img.png" alt="User img">-->
         </div>
         <div id="menuIcon">
@@ -57,11 +57,8 @@
             </ul>
         </nav>
         <section id="main">
-        	<div class="content">
-
-
-
-
+        	<div class="left-content">
+                 @yield('content')
         	</div>
         	<footer>
                 <p>
