@@ -36,7 +36,7 @@
                 <li>
                     <i class="fas fa-info-circle"></i>
                     
-                    <a>Opção 1</a>
+                    <a>Home Page</a>
                 </li>
                 <li>
                     <i class="fas fa-box"></i>
