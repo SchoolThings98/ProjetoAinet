@@ -16,7 +16,7 @@ class HomepageController extends Controller
     	$numeroUtilizadores = User::count();
     	$numeroContas = Conta::count();
 		$numeroMovimentos = Movimento::count();
-        //return view('homepage.index',compact('numeroUtilizadores', 'numeroContas','numeroMovimentos'));
-        return view('welcome');
+        return view('homepage.index',compact('numeroUtilizadores', 'numeroContas','numeroMovimentos'));
+        //return view('welcome');
     }
 }
