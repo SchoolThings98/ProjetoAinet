@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +17,8 @@ Route::get('/', function () {
 });
 */
 Route::get('/', 'HomepageController@index')->name('home');
-Route::get('/teste', 'HomepageController@index')->name('teste')->middleware('auth');
+//Teste Route::get('/teste', 'HomepageController@index')->name('teste')->middleware('auth');
+Route::get('/users', 'UserController@index')->name('users');
 
 Auth::routes(['verify' => true]);
 
