@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,8 +17,12 @@ Route::get('/', function () {
 });
 */
 Route::get('/', 'HomepageController@index')->name('home');
-Route::get('/teste', 'HomepageController@index')->name('teste')->middleware('auth');
+//Teste Route::get('/teste', 'HomepageController@index')->name('teste')->middleware('auth');
+Route::get('/users', 'UserController@index')->name('users')->middleware('auth');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Route::post('reset_password_without_token', 'UserController@validatePasswordRequest');
+//Route::post('reset_password_with_token', 'UserController@resetPassword');

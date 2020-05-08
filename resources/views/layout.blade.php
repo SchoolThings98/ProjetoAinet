@@ -66,12 +66,11 @@
 
                 <li>
                     <i class="fas fa-info-circle"></i>
-                    
                     <a href="{{ url('/') }}">Home Page</a>
                 </li>
                 <li>
                     <i class="fas fa-box"></i>
-                    <a href="{{ url('/teste') }}">Opção 2</a>
+                    <a href="{{ url('/users') }}">Opção 2</a>
                 </li>
                 <li>
                     <i class="far fa-file"></i>
