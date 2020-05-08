@@ -20,6 +20,6 @@ Route::get('/', 'HomepageController@index')->name('home');
 //Teste Route::get('/teste', 'HomepageController@index')->name('teste')->middleware('auth');
 Route::get('/users', 'UserController@index')->name('users');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
