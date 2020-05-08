@@ -23,3 +23,6 @@ Route::get('/users', 'UserController@index')->name('users')->middleware('auth');
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Route::post('reset_password_without_token', 'UserController@validatePasswordRequest');
+//Route::post('reset_password_with_token', 'UserController@resetPassword');
