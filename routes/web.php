@@ -24,5 +24,5 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('reset_password_without_token', 'AccountsController@validatePasswordRequest');
-Route::post('reset_password_with_token', 'AccountsController@resetPassword');
+//Route::post('reset_password_without_token', 'UserController@validatePasswordRequest');
+//Route::post('reset_password_with_token', 'UserController@resetPassword');

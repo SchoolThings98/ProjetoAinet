@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ url('/reset_password_without_token')}}">
+                    <form method="POST" action="{{ route('password.email') }}">
                         @csrf
 
                         <div class="form-group row">
