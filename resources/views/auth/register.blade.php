@@ -60,6 +60,20 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="NIF" class="col-md-4 col-form-label text-md-right">{{ __('Número Contribuinte') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="NIF" type="NIF" class="form-control" name="NIF">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="telefone" class="col-md-4 col-form-label text-md-right">{{ __('Número Telemovel') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="telefone" type="telefone" class="form-control" name="telefone">
+                            </div>
+                        </div>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

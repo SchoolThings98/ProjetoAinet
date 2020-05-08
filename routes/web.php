@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 */
 Route::get('/', 'HomepageController@index')->name('home');
+Route::get('/teste', 'HomepageController@index')->name('teste')->middleware('auth');
 
 Auth::routes(['verify' => true]);
 
