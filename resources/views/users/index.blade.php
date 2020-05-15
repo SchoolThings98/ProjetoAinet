@@ -3,6 +3,7 @@
 <h1 class= "text-align">Utilizadores</h1>
 <h3>Lista de Utilizadores:</h3>
 
+ <input>
 
 <table>
     <thead>
@@ -21,7 +22,6 @@
             asset('img/default_img.png') }}" alt="Imagem por defeito"></td>
             <td>{{ $user->name }} </td>
             <td>{{ $user->email }} </td>
-            <td><a>Edit</a></td>
             <td>
                
                 <form action="user/{{$user->id}}" method="POST">

@@ -13,7 +13,7 @@ class UserController extends Controller
 
     	$qry = User::where('id','>=','0');
     	if($request->has('name')){
-    		$qry->where('name',$request->query('name'));
+    		$qry->where('name','like','%'.$request->query('name').'%');
     	}
     	if($request->has('email')){
     		$qry->where('email',$request->query('email'));	
