@@ -29,6 +29,7 @@
                             <!--<a href="{{ url('/') }}">{{Auth::user()->name}}</a>-->
                             <a>{{Auth::user()->name}}</a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -74,11 +75,11 @@
                 </li>
                 <li>
                     <i class="far fa-file"></i>
-                    <a>Opção 3</a>
+                    <a>Contas</a>
                 </li>
                 <li>
                     <i class="fas fa-users"></i>
-                    <a>Opção 4</a>
+                    <a href="{{ url('/movimentos') }}">Movimentos</a>
                 </li>
                 <li>
                     <i class="fab fa-wpforms"></i>
