@@ -2,8 +2,18 @@
 @section('content')
 <h1 class= "text-align">Utilizadores</h1>
 <h3>Lista de Utilizadores:</h3>
-
- <input>
+<form method="GET" action="{{route('users')}}">	
+	@csrf
+	<div>
+		<p>Pesquisar por email</p>
+	 	<input type="text" name="email">
+	 </div>
+	 <div>
+	 	<p>Pesquisar por Nome</p>
+	 	<input type="text" name="name">
+	 </div>
+     <button type="submit">Pesquisar</button>
+</form>
 
 <table>
     <thead>
