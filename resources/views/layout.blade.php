@@ -71,7 +71,7 @@
                 </li>
                 <li>
                     <i class="fas fa-box"></i>
-                    <a href="{{ url('/users') }}">Opção 2</a>
+                    <a href="{{ url('/users') }}">Users</a>
                 </li>
                 <li>
                     <i class="far fa-file"></i>
