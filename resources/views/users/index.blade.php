@@ -12,6 +12,11 @@
 	 	<p>Pesquisar por Nome</p>
 	 	<input type="text" name="name">
 	 </div>
+	 @if (Auth::user()->adm === 1)
+
+    	@include('users.partials.filtros-index')
+
+	 @endif 
      <button type="submit">Pesquisar</button>
 </form>
 
@@ -21,8 +26,10 @@
         	<th>Foto</th>
             <th>Nome</th>
             <th>Email</th>
-            <th></th>
-            <th></th>
+            @if (Auth::user()->adm === 1)
+            <th>Administrador</th>
+            <th>Bloqueado</th>
+            @endif 
         </tr>
     </thead>
     <tbody>
@@ -32,6 +39,11 @@
             asset('img/default_img.png') }}" alt="Imagem por defeito"></td>
             <td>{{ $user->name }} </td>
             <td>{{ $user->email }} </td>
+            @if (Auth::user()->adm === 1)
+
+    			@include('users.partials.colunas-index')
+
+			 @endif
             <td>
                
                 <form action="user/{{$user->id}}" method="POST">
