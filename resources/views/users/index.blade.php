@@ -29,6 +29,7 @@
             @if (Auth::user()->adm === 1)
             <th>Administrador</th>
             <th>Bloqueado</th>
+            <th>Alterar</th>
             @endif 
         </tr>
     </thead>

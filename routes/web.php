@@ -18,7 +18,11 @@ Route::get('/', function () {
 */
 Route::get('/', 'HomepageController@index')->name('home');
 //Teste Route::get('/teste', 'HomepageController@index')->name('teste')->middleware('auth');
+
+//users
 Route::get('/users', 'UserController@index')->name('users')->middleware('auth');
+Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
+Route::put('users/{user}', 'CursoController@update')->name('users.update');
 
 Auth::routes(['verify' => true]);
 
