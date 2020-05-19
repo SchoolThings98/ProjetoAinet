@@ -33,9 +33,19 @@ class UserController extends Controller
             ->withUser($user);
     }
 
-    public function update(UserPost $request, User $user){
+    public function update(UserPost $request,User $user){
+        $validated_data = $request->validated();
+        $user->bloqueado = $validated_data['bloqueado'];
+        $user->adm = $validated_data['adm'];
+        $user->save();
+        return redirect()->route('users')
+                    ->with('alert-msg', 'User "' . $user->name . '" foi alterado com sucesso!')
+                    ->with('alert-type', 'success');
+    }
 
-        return redirect()->route('users');
+    public function perfil(){
+
+        return view('users.perfil');
     }
 
 }

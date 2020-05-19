@@ -45,14 +45,6 @@
     			@include('users.partials.colunas-index')
 
 			 @endif
-            <td>
-               
-                <form action="user/{{$user->id}}" method="POST">
-                    @csrf
-                    @method("DELETE")
-                    <input type="submit" value="Delete">
-                </form>
-            </td>
         </tr>
     @endforeach
     </tbody>

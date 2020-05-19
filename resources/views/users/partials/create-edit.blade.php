@@ -1,4 +1,4 @@
- <div>Bloqueado</div>
+<div>Bloqueado</div>
     <div class="form-check form-check-inline">
         <input type="radio" class="form-check-input" id="bloqueado" name="bloqueado" value="1" {{old('bloqueado',  $user->bloqueado) == 1 ? 'checked' : ''}}>
         <label class="form-check-label" for="bloqueado"> Sim </label>

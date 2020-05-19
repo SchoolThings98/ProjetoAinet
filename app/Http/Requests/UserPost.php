@@ -13,7 +13,7 @@ class UserPost extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class UserPost extends FormRequest
     public function rules()
     {
         return [
-            //
+            'bloqueado' => 'required|integer|in:0,1',
+            'adm' => 'required|integer|in:0,1'
         ];
     }
 }

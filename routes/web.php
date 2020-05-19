@@ -16,13 +16,14 @@ Route::get('/', function () {
     return view('layout');
 });
 */
-Route::get('/', 'HomepageController@index')->name('home');
+Route::get('/', 'HomepageController@index')->name('homepage');
 //Teste Route::get('/teste', 'HomepageController@index')->name('teste')->middleware('auth');
 
 //users
 Route::get('/users', 'UserController@index')->name('users')->middleware('auth');
 Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
-Route::put('users/{user}', 'CursoController@update')->name('users.update');
+Route::put('users/{user}', 'UserController@update')->name('users.update');
+Route::get('/perfil','UserController@perfil')->name('perfil')->middleware('auth');
 
 Auth::routes(['verify' => true]);
 

@@ -67,11 +67,11 @@
 
                 <li>
                     <i class="fas fa-info-circle"></i>
-                    <a href="{{ url('/') }}">Home Page</a>
+                    <a href="{{ route('homepage') }}">Home Page</a>
                 </li>
                 <li>
                     <i class="fas fa-box"></i>
-                    <a href="{{ url('/users') }}">Users</a>
+                    <a href="{{ route('users') }}">Users</a>
                 </li>
                 <li>
                     <i class="far fa-file"></i>
@@ -79,11 +79,11 @@
                 </li>
                 <li>
                     <i class="fas fa-users"></i>
-                    <a href="{{ url('/movimentos') }}">Movimentos</a>
+                    <a href="{{ route('movimentos') }}">Movimentos</a>
                 </li>
                 <li>
                     <i class="fab fa-wpforms"></i>
-                    <a>Opção 5</a>
+                    <a href="{{route('perfil')}}">Perfil</a>
                 </li>
             </ul>
         </nav>
