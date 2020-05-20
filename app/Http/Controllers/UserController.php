@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\Http\Request\UserPost;
+use App\Http\Requests\UserPost;
 
 class UserController extends Controller
 {
