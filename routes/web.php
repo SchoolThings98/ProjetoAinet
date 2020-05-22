@@ -23,7 +23,8 @@ Route::get('/', 'HomepageController@index')->name('homepage');
 Route::get('/users', 'UserController@index')->name('users')->middleware('auth');
 Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
 Route::put('users/{user}', 'UserController@update')->name('users.update');
-Route::get('/perfil','UserController@perfil')->name('perfil')->middleware('auth');
+Route::get('/perfil/edit','UserController@perfil')->name('perfil')->middleware('auth');
+Route::put('/perfil/{user}','UserController@update_perfil')->name('perfil.update');
 
 Auth::routes(['verify' => true]);
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Requests\UserPost;
+use App\Http\Requests\PerfilPost;
 
 class UserController extends Controller
 {
@@ -45,6 +46,16 @@ class UserController extends Controller
 
     public function perfil(){
         return view('users.perfil');
+    }
+
+    public function update_perfil(PerfilPost $request, User $user){
+        $validated_data = $request->validated();
+        $user->name = $validated_data['name'];
+        $user->email = $validated_data['email'];
+        $user->NIF = $validated_data['NIF'];
+        $user->telefone = $validated_data['telefone'];
+        $user->save();
+        return redirect()->route('homepage');
     }
 
 }

@@ -19,3 +19,10 @@
     <label for="Telefone">Telefone</label>
     <input type="text" class="form-control" name="telefone" id="Telefone" value="{{old('telefone', Auth::user()->telefone )}}" >
 </div>
+<div>
+    @if (Route::has('password.request'))
+        <a class="btn btn-link" href="{{ route('password.request') }}">
+            {{ __('Change Password') }}
+       </a>
+  	@endif	
+</div>
