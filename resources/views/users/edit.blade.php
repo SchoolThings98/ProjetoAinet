@@ -10,8 +10,4 @@
            <a href="{{route('users') }}" class="btn btn-secondary">Cancel</a>
     </div>
 </form>
-
-
-
-
 @endsection

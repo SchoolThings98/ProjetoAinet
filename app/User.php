@@ -17,7 +17,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'NIF', 'telefone',
     ];
 
     /**
@@ -52,6 +52,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function contas(){
         return $this->belongsToMany('App\Conta','autorizacoes_contas','user_id','conta_id');
-        
+
     }
 }

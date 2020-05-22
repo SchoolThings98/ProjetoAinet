@@ -14,15 +14,15 @@ class UserController extends Controller
     	$qry = User::where('id','>=','0');
     	if($request->has('name')){
     		$qry->where('name','like','%'.$request->query('name').'%');
-             
+
     	}
     	if($request->has('email')){
-    		$qry->where('email','like','%'.$request->query('email').'%');	
+    		$qry->where('email','like','%'.$request->query('email').'%');
     	}
         if($request->has('bloqueado')){
             $qry->where('bloqueado',$request->query('bloqueado'));
         }
-    	$todosUtilizadores = $qry->paginate(10); 
+    	$todosUtilizadores = $qry->paginate(10);
         return view(
             'users.index')->with('users',$todosUtilizadores);
     }
@@ -35,6 +35,10 @@ class UserController extends Controller
 
     public function update(UserPost $request,User $user){
         $validated_data = $request->validated();
+        $user->email = $validated_data['email'];
+        $user->name = $validated_data['name'];
+        $user->NIF = $validated_data['NIF'];
+        $user->telefone = $validated_data['telefone'];
         $user->bloqueado = $validated_data['bloqueado'];
         $user->adm = $validated_data['adm'];
         $user->save();
@@ -44,7 +48,6 @@ class UserController extends Controller
     }
 
     public function perfil(){
-
         return view('users.perfil');
     }
 

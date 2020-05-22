@@ -64,7 +64,13 @@
                             <label for="NIF" class="col-md-4 col-form-label text-md-right">{{ __('Número Contribuinte') }}</label>
 
                             <div class="col-md-6">
-                                <input id="NIF" type="NIF" class="form-control" name="NIF">
+                                <input id="NIF" type="text" class="form-control @error('NIF') is-invalid @enderror" name="NIF" value="{{ old('NIF') }}">
+
+                                @error('NIF')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-group row">
@@ -96,3 +102,4 @@
     </div>
 </div>
 @endsection
+
