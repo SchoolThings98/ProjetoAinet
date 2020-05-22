@@ -122,6 +122,26 @@ nav ul{
     flex-direction: column;
     list-style-type: none;
 }
+ul.pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+
+
+ul.pagination li {
+    display: inline;
+}
+
+
+
+ul.pagination li a, ul.pagination li span {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
 nav li{
     height:30px;
     line-height:30px;
