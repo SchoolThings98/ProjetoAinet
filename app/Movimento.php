@@ -22,4 +22,17 @@ class Movimento extends Model
 
     	return $this->belongsTo('App\Categoria');
     }
+
+    public function tipoToString()
+    {
+    	switch ($this->tipo){
+    		case 'D':
+    			return 'Despesa';
+    		case 'R':
+    			return 'Receita';
+    	}
+    	return '';
+    }
+
+    
 }
