@@ -62,7 +62,6 @@
                         </div>
                         <div class="form-group row">
                             <label for="NIF" class="col-md-4 col-form-label text-md-right">{{ __('Número Contribuinte') }}</label>
-
                             <div class="col-md-6">
                                 <input id="NIF" type="text" class="form-control @error('NIF') is-invalid @enderror" name="NIF" value="{{ old('NIF') }}">
 
@@ -75,9 +74,14 @@
                         </div>
                         <div class="form-group row">
                             <label for="telefone" class="col-md-4 col-form-label text-md-right">{{ __('Número Telemovel') }}</label>
-
                             <div class="col-md-6">
-                                <input id="telefone" type="telefone" class="form-control" name="telefone">
+                                <input id="telefone" type="text" class="form-control @error('telefone') is-invalid @enderror" name="telefone" value="{{ old('telefone') }}">
+
+                                @error('telefone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-group">

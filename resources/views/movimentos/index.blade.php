@@ -2,13 +2,22 @@
 @section('content')
 <h1 class= "text-align">Movimentos</h1>
 <h3>Lista de Movimentos:</h3>
-
-<input>
-
+<form method="GET" action="{{route('movimentos')}}">
+	@csrf
+	<div>
+		<p>Pesquisar por Categoria</p>
+         <input type="text" name="nome">
+	</div>
+	<div>
+	 	<p>Pesquisar por Tipo</p>
+	 	<input type="text" name="tipo">
+	 </div>
+     <button type="submit">Pesquisar</button>
+</form>
 <table>
     <thead>
         <tr>
-        	  <th>Data</th>
+        	<th>Data</th>
             <th>Valor</th>
             <th>Saldo Inicial</th>
             <th>Saldo Final</th>
@@ -27,7 +36,7 @@
         <td> {{$movimento->tipo}} </td>
         <td>
           <!-- Ferramentas -->
-          @can('update', $movimento)
+        {{--   @can('update', $movimento)
           <div data-widget="tree">
             <div class="treeview">
               <a href="#" class=""><i class="fas fa-tools"></i></a>
@@ -49,13 +58,13 @@
               </ul>
             </div>
           </div>
-          @endcan
+          @endcan --}}
           <!-- Ferramentas -->
         </td>
       </tr>
       @endforeach
     </tbody>
 </table>
-
+{{-- paginação  --}}
 <div><a>{{$movimentos->links()}}</a></div>
 @endsection
