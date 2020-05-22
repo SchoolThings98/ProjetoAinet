@@ -1,7 +1,7 @@
 @extends('layout')
 @section('content')
 
-<form method="POST" action="{{route('users.update', Auth::user()) }}" class="form-group">
+<form method="POST" action="{{route('perfil.update', Auth::user()) }}" class="form-group">
     @csrf
     @method('PUT')
     @include('users.partials.perfil-edit')

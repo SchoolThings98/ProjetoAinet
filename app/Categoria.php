@@ -10,6 +10,6 @@ class Categoria extends Model
 	//Use SoftDelete;
 	//movimentos_c != da funçao movimetos do Modelo Conta
     public function movimentos(){
-    	return $this->hasMany('App\Movimento');
+    	return $this->hasMany('App\Movimento', 'categoria_id', 'id');
     }
 }
