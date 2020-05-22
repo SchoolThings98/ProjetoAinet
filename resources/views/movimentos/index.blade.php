@@ -8,7 +8,7 @@
 <table>
     <thead>
         <tr>
-        	<th>Data</th>
+        	  <th>Data</th>
             <th>Valor</th>
             <th>Saldo Inicial</th>
             <th>Saldo Final</th>
@@ -19,14 +19,13 @@
     <tbody>
       @foreach ($movimentos as $movimento)
       <tr>
-        <td> {{$movimento->id}} </td>
-       <!-- <td> {{$movimento->data}} </td>
+        <td> {{$movimento->data}} </td>
         <td> {{$movimento->valor}} </td>
         <td> {{$movimento->saldo_inicial}} </td>
         <td> {{$movimento->saldo_final}} </td>
-        <td> {{$movimento->categoria}} </td>
-        <td> {{$movimento->tipo_movimento}} </td>
-        <td>-->
+        <td> {{$movimento->categoria_id}} </td>
+        <td> {{$movimento->tipo}} </td>
+        <td>
           <!-- Ferramentas -->
           @can('update', $movimento)
           <div data-widget="tree">
