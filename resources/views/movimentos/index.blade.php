@@ -2,9 +2,18 @@
 @section('content')
 <h1 class= "text-align">Movimentos</h1>
 <h3>Lista de Movimentos:</h3>
-
-<input>
-
+<form method="GET" action="{{route('movimentos')}}">
+	@csrf
+	<div>
+		<p>Pesquisar por Categoria</p>
+         <input type="text" name="nome">
+	</div>
+	<div>
+	 	<p>Pesquisar por Tipo</p>
+	 	<input type="text" name="tipo">
+	 </div>
+     <button type="submit">Pesquisar</button>
+</form>
 <table>
     <thead>
         <tr>
@@ -19,16 +28,15 @@
     <tbody>
       @foreach ($movimentos as $movimento)
       <tr>
-        <td> {{$movimento->id}} </td>
-       <!-- <td> {{$movimento->data}} </td>
+        <td> {{$movimento->data}} </td>
         <td> {{$movimento->valor}} </td>
         <td> {{$movimento->saldo_inicial}} </td>
         <td> {{$movimento->saldo_final}} </td>
-        <td> {{$movimento->categoria}} </td>
-        <td> {{$movimento->tipo_movimento}} </td>
-        <td>-->
+        <td> {{$movimento->categoria_id}} </td>
+        <td> {{$movimento->tipo}} </td>
+        <td>
           <!-- Ferramentas -->
-          @can('update', $movimento)
+        {{--   @can('update', $movimento)
           <div data-widget="tree">
             <div class="treeview">
               <a href="#" class=""><i class="fas fa-tools"></i></a>
@@ -50,13 +58,13 @@
               </ul>
             </div>
           </div>
-          @endcan
+          @endcan --}}
           <!-- Ferramentas -->
         </td>
       </tr>
       @endforeach
     </tbody>
 </table>
-
+{{-- paginação  --}}
 <div><a>{{$movimentos->links()}}</a></div>
 @endsection
