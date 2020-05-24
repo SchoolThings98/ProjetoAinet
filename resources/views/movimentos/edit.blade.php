@@ -1,8 +1,10 @@
 @extends('layout')
 @section('content')
 
-<form method="POST" action="{{route('movimentos.store')}}" novalidate class="form-group">
+<form method="POST" action="{{route('movimentos.update', $movimento->id)}}" novalidate class="form-group">
+	@method('PUT')
 	@csrf
+	<input type="hidden" name="id" value="{{ $movimento->id }}" />
 	<div class="form-group">
         <label for="inputData">Data do Movimento</label>
         <input
@@ -54,20 +56,23 @@
                 <strong><em>{{ $errors->first('descricao') }}</em></strong>
             @endif
     </div>
-	<input
-        type="hidden" class="form-control"
-        name="confirmado" value="0" />
-    @can('view', Auth::user())
-        <div class="form-group">
-            <label for="inputConfirmado">Confirmado</label>
-            <input
-                type="checkbox" id="inputConfirmado"
-                name="confirmado" value="1" {{ old('confirmado') == '1' ?"checked":"" }} />
-        </div>
-    @endcan
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary" name="ok">Adicionar</button>
-        <a href="/movimentos" id="cancel" name="cancel" class="btn btn-default">Cancelar</a>
+	<input type="hidden" name="confirmado" value="{{ $movimento->confirmado }}" />
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" name="ok">Guardar</button>
+                <a href="/movimentos" id="cancel" name="cancel" class="btn btn-default">Cancelar</a>
+            </div>
+        </form>
     </div>
-</form>
+    <div class="col-md-6 text-right">
+        @can('view', Auth::user())
+        <form method="POST" action="{{route('movimentos.confirmar', $movimento->id)}}" class="form-group" novalidate>
+            @method('PATCH')
+            @csrf
+            <button type="submit" class="btn btn-success" name="confirmado">Confirmar Movimento</button>
+        </form>
+        @endcan
+    </div>
+</div>
 @endsection
