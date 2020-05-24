@@ -26,9 +26,11 @@ Route::put('users/{user}', 'UserController@update')->name('users.update');
 Route::get('/perfil/edit','UserController@perfil')->name('perfil')->middleware('auth');
 Route::put('/perfil/{user}','UserController@update_perfil')->name('perfil.update');
 
+
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/movimentos', 'MovimentoController@index')->name('movimentos')->middleware('auth');
+
 

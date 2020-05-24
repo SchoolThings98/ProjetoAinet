@@ -14,6 +14,13 @@
 	 </div>
      <button type="submit">Pesquisar</button>
 </form>
+
+<div class="col text-right">
+  @can('create', App\Moviemento::class)
+  <div><a class="btn btn-primary" href="{{route('movimentos.create')}}">Adicionar Movimento</a></div>
+  @endcan
+</div>
+
 <table>
     <thead>
         <tr>

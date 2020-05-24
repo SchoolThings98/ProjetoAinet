@@ -13,7 +13,6 @@ class MovimentoController extends Controller
 {
 
 	public function index(Request $request)
-<<<<<<< HEAD
 	{
 		$qry = Movimento::where('id','>=','0');
     	/*if($request->has('name')){
@@ -23,7 +22,7 @@ class MovimentoController extends Controller
     		$qry->where('email',$request->query('email'));	
     	}*/
 
-        if (request()->query('tipo')) {
+        /*if (request()->query('tipo')) {
             $movimentos = $movimentos->where('tipo', '=', 'D');
         }
         if (request()->query('tipo')) {
@@ -34,12 +33,9 @@ class MovimentoController extends Controller
         }
         if(request()->query('confirmado') == '0'){
             $movimentos = $movimentos->where('confirmado', '=', '0');
-        }
+        }*/
 
-    	$todosMovimentos = $qry->paginate(10);
 
-=======
-	{$qry = Movimento::where('id','>=','0');
     	/* if($request->has('nome')){
             $categoria = Categoria::where('nome', $request->query('nome'));
     		// $qry->where('categoria_id',$categoria->id());
@@ -48,17 +44,39 @@ class MovimentoController extends Controller
     		$qry->where('tipo','like','%'.$request->query('tipo').'%');
     	} */
     	$todosMovimentos = $qry->paginate(30);
->>>>>>> 71c462ef18eac16673aeb3bfe294b11ac7a03a9b
-        return view(
-            'movimentos.index')->with('movimentos',$todosMovimentos);
+        return view('movimentos.index')->with('movimentos',$todosMovimentos);
 	}
 
     public function create(){
+        $this->authorize('create', Movimento::class);
+        $pagetitle = "Adicionar movimento";
 
-
-        return view('movimentos.create');
+        return view('movimentos.create', compact('pagetitle'));
     }
 
+    public function edit($id)
+    {
+        $this->authorize('update', Movimento::findOrFail($id));
+        $pagetitle = "Editar Movimento";
+        $movimento = Movimento::findOrFail($id);
 
+        return view('movimentos.edit', compact('pagetitle'));   
+    }
+
+     public function destroy($id)
+    {
+        $this->authorize('delete', Movimento::findOrFail($id));
+        Movimento::destroy($id);
+        return redirect()->action('MovimentoController@index')->with('status', 'Movimento eliminado com sucesso!');
+    }
+
+    public function confirmarMovimento(Request $request, $id)
+    {
+        $this->authorize('confirmar', Movimento::findOrFail($id));
+        $movimentoModel = Movimento::findOrFail($id);
+        $movimentoModel['confirmado'] = '1';
+        $movimentoModel->save();
+        return redirect()->action('MovimentoController@index')->with('status', 'Movimento confirmado com sucesso!');
+    }
 }
 
