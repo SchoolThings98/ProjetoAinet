@@ -75,11 +75,11 @@
                 </li>
                 <li>
                     <i class="far fa-file"></i>
-                    <a>Contas</a>
+                    <a href={{route('contas')}}>Contas</a>
                 </li>
                 <li>
                     <i class="fas fa-users"></i>
-                    <a href="{{ route('movimentos') }}">Movimentos</a>
+                    <a href="{{ route('movimentos')}}">Movimentos</a>
                 </li>
                 <li>
                     <i class="fab fa-wpforms"></i>

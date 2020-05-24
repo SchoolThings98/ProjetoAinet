@@ -50,6 +50,6 @@
     </tbody>
 </table>
 
-<div><a>{{$users->links()}}</a></div>
+<div>{{$users->links()}}</div>
 
 @endsection

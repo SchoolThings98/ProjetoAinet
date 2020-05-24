@@ -32,7 +32,7 @@
         <td> {{$movimento->valor}} </td>
         <td> {{$movimento->saldo_inicial}} </td>
         <td> {{$movimento->saldo_final}} </td>
-        <td> {{$movimento->categoria_id}} </td>
+        <td> {{ is_null($movimento->categoriaRef) ? '' : $movimento->categoriaRef->nome}}</td>
         <td> {{$movimento->tipo}} </td>
         <td>
           <!-- Ferramentas -->

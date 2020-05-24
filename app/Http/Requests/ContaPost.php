@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PerfilPost extends FormRequest
+class ContaPost extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,8 @@ class PerfilPost extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users'],
-            'NIF' => 'require|integer|min:100000000|max:999999999|unique:users'],
-            'telefone' => 'required|string|min:6|max:15'            
+            'nome'=> 'required|string|max:20',
+            'saldo_abertura'=> 'required|integer'
         ];
     }
 }
