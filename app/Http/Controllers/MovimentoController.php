@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Movimento;
 use App\Categoria;
 use App\User;
-
+use App\Http\Requests\UpdateMovimento;
 
 
 
@@ -57,13 +57,21 @@ class MovimentoController extends Controller
         return view('movimentos.create', compact('pagetitle'));
     }
 
-    public function edit($id)
+    public function edit(Movimento $movimento)
     {
-        $this->authorize('update', Movimento::findOrFail($id));
-        $pagetitle = "Editar Movimento";
-        $movimento = Movimento::findOrFail($id);
 
-        return view('movimentos.edit', compact('pagetitle'));   
+        return view('movimentos.edit')->withMovimento($movimento);   
+    }
+
+    public function update(UpdateMovimento $request, Movimento $movimento){
+        $validated_data = $request->validated();
+        $movimento->data = $validated_data['data'];
+        $movimento->valor = $validated_data['valor'];
+        $movimento->tipo = $validated_data['tipo'];
+        $movimento->categoria_id = $validated_data['categoria_id'];
+        $movimento->descricao = $validated_data['descricao'];
+        $movimento->save();
+        return redirect()->route('movimentos');
     }
 
      public function destroy($id)

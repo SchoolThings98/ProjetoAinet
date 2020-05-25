@@ -30,7 +30,6 @@ class UpdateMovimento extends FormRequest
             'tipo' => 'required|in:D,R',
             'categoria_id' => 'nullable|integer|digits_between:1,43',
             'descricao' => 'nullable|string',
-            'confirmado' => 'required|in:0,1',
         ];
     }
 
