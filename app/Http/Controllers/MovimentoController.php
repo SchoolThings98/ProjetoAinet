@@ -25,15 +25,8 @@ class MovimentoController extends Controller
 	}
 
     public function create(){
-        $validated_data = $request->validated();
-        $movimento->data = $validated_data['data'];
-        $movimento->valor = $validated_data['valor'];
-        $movimento->tipo = $validated_data['tipo'];
-        $movimento->categoria_id = $validated_data['categoria_id'];
-        $movimento->descricao = $validated_data['descricao'];
-        $movimento->save();
-        return redirect()->route('movimentos');
-        //return view('movimentos.create')->withMovimento($movimento);
+        $novoMovimento = new Movimento;
+        return view('movimentos.create')->withMovimento($novoMovimento);
     }
 
     public function edit(Movimento $movimento)
