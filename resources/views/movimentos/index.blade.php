@@ -4,6 +4,13 @@
 <h3>Lista de Movimentos:</h3>
 <form method="GET" action="{{route('movimentos')}}">
 	@csrf
+<div>
+  <select class="custom-select" name="conta_id" id="inputConta" aria-label="Conta">
+    @foreach ($contas as $conta)
+    <option value={{$conta}}>{{$conta->nome}}</option>
+    @endforeach
+  </select>
+</div>
 	<div>
 		<p>Pesquisar por Categoria</p>
          <input type="text" name="nome">
@@ -15,12 +22,9 @@
      <button type="submit">Pesquisar</button>
 </form>
 
-<div class="col text-right">
-  @can('create', App\Moviemento::class)
-  <div><a class="btn btn-primary" href="{{route('movimentos.create')}}">Adicionar Movimento</a></div>
-  @endcan
+<<div class="row mb-3">
+   <a  href="{{route('movimentos.create',['movimento' => $movimentos])}}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Adicionar Movimento</a>
 </div>
-
 <table>
     <thead>
         <tr>

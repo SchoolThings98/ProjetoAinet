@@ -1,9 +1,9 @@
 @extends('layout')
 @section('content')
 
-<form method="POST" action="{{route('movimentos.create')}}" novalidate class="form-group">
+<form method="POST" action="{{route('estatistica.store')}}" novalidate class="form-group">
 	@csrf
-    @include('movimentos.partials.create-edit')
+    @include('estatisticas.partials.create-edit')
 	<input
         type="hidden" class="form-control"
         name="confirmado" value="0" />
@@ -17,8 +17,7 @@
     @endcan
     <div class="form-group">
         <button type="submit" class="btn btn-primary" name="ok">Adicionar</button>
-        <a href="/movimentos" id="cancel" name="cancel" class="btn btn-default">Cancelar</a>
+        <a href="/estatistica" id="cancel" name="cancel" class="btn btn-default">Cancelar</a>
     </div>
 </form>
-
 @endsection
