@@ -15,10 +15,8 @@
      <button type="submit">Pesquisar</button>
 </form>
 
-<div class="col text-right">
-  @can('create', App\Moviemento::class)
-  <div><a class="btn btn-primary" href="{{route('movimentos.create')}}">Adicionar Movimento</a></div>
-  @endcan
+<<div class="row mb-3">
+   <a  href="{{route('movimentos.create',['movimento' => $movimentos])}}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Adicionar Movimento</a>
 </div>
 
 <table>
@@ -34,7 +32,7 @@
         </tr>
     </thead>
     <tbody>
-      @foreach ($movimentos as $movimento)
+      @foreach (Auth::user()->contas()->movimentos()->get() as $movimento)
       <tr>
         <td> {{$movimento->data}} </td>
         <td> {{$movimento->valor}} </td>

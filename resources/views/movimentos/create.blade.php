@@ -1,7 +1,7 @@
 @extends('layout')
 @section('content')
 
-<form method="POST" action="{{route('movimentos.store')}}" novalidate class="form-group">
+<form method="POST" action="{{route('movimentos.create')}}" novalidate class="form-group">
 	@csrf
     @include('movimentos.partials.create-edit')
 	<input
@@ -20,4 +20,5 @@
         <a href="/movimentos" id="cancel" name="cancel" class="btn btn-default">Cancelar</a>
     </div>
 </form>
+
 @endsection

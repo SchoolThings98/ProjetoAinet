@@ -51,16 +51,32 @@ class MovimentoController extends Controller
 	}
 
     public function create(){
-        $this->authorize('create', Movimento::class);
-        $pagetitle = "Adicionar movimento";
-
-        return view('movimentos.create', compact('pagetitle'));
+        $validated_data = $request->validated();
+        $movimento->data = $validated_data['data'];
+        $movimento->valor = $validated_data['valor'];
+        $movimento->tipo = $validated_data['tipo'];
+        $movimento->categoria_id = $validated_data['categoria_id'];
+        $movimento->descricao = $validated_data['descricao'];
+        $movimento->save();
+        return redirect()->route('movimentos');
+        //return view('movimentos.create')->withMovimento($movimento);
     }
 
     public function edit(Movimento $movimento)
     {
 
         return view('movimentos.edit')->withMovimento($movimento);   
+    }
+
+    public function store(MovimentoPost $request){
+        $validated_data = $request->validated();
+        $movimento->data = $validated_data['data'];
+        $movimento->valor = $validated_data['valor'];
+        $movimento->tipo = $validated_data['tipo'];
+        $movimento->categoria_id = $validated_data['categoria_id'];
+        $movimento->descricao = $validated_data['descricao'];
+        $movimento->save();
+        return redirect()->route('movimentos');
     }
 
     public function update(UpdateMovimento $request, Movimento $movimento){
