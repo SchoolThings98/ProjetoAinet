@@ -25,8 +25,8 @@ class PerfilPost extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users'],
-            'NIF' => 'require|integer|min:100000000|max:999999999|unique:users'],
+            'email' => 'required|string|email|max:255|unique:users',
+            'NIF' => 'require|integer|min:100000000|max:999999999|unique:users',
             'telefone' => 'required|string|min:6|max:15'            
         ];
     }

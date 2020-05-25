@@ -30,6 +30,7 @@
             <th>Saldo Final</th>
             <th>Categoria do Movimento</th>
             <th>Tipo de Movimento</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -41,6 +42,7 @@
         <td> {{$movimento->saldo_final}} </td>
         <td> {{ is_null($movimento->categoriaRef) ? '' : $movimento->categoriaRef->nome}}</td>
         <td> {{$movimento->tipo}} </td>
+        <td><a href="{{route('movimentos.edit',['movimento' => $movimento])}}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Editar Movimento</a></td>
         <td>
           <!-- Ferramentas -->
         {{--   @can('update', $movimento)
