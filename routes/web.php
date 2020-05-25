@@ -37,6 +37,10 @@ Route::get('/movimentos/{movimento}/edit', 'MovimentoController@edit')->name('mo
 Route::put('/movimentos/{movimento}', 'MovimentoController@update')->name('movimentos.update');
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> bb0ba285e1a2803503dbfb1366465d825858cdcb
 //Contas
 Route::get('/contas','ContaController@index')->name('contas')->middleware('auth');
 Route::get('/contas/create', 'ContaController@create')->name('contas.create');
