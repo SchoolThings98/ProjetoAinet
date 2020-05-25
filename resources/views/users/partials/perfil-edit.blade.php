@@ -1,6 +1,6 @@
 <div class="form-group">
     <label for="Nome">Nome</label>
-    <input type="text" class="form-control" name="name" id="Nome" value="{{old('name', Auth::user()->name )}}" >
+    <input type="text" class="form-control" name="name" id="Nome" value="{{old('name', $user->name )}}" >
     <!--
 		em cima no value tirei ?? ''->name entre user() e ->name para nao mostrar a info toda
     @error('name')
@@ -9,15 +9,15 @@
 </div>
 <div class="form-group">
     <label for="Mail">Mail</label>
-    <input type="text" class="form-control" name="email" id="Mail" value="{{old('email', Auth::user()->email )}}" >
+    <input type="text" class="form-control" name="email" id="Mail" value="{{old('email', $user->email )}}" >
 </div>
 <div class="form-group">
     <label for="Nif">NIF</label>
-    <input type="text" class="form-control" name="NIF" id="Nif" value="{{old('NIF', Auth::user()->NIF )}}" >
+    <input type="text" class="form-control" name="NIF" id="Nif" value="{{old('NIF', $user->NIF )}}" >
 </div>
 <div class="form-group">
     <label for="Telefone">Telefone</label>
-    <input type="text" class="form-control" name="telefone" id="Telefone" value="{{old('telefone', Auth::user()->telefone )}}" >
+    <input type="text" class="form-control" name="telefone" id="Telefone" value="{{old('telefone', $user->telefone )}}" >
 </div>
 <div>
     @if (Route::has('password.request'))

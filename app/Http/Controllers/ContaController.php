@@ -6,9 +6,13 @@ use App\Conta;
 use App\Movimento;
 use App\Http\Requests\ContaPost;
 use Auth;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ContaController extends Controller
 {
+
+	use SoftDeletes;
+
     public function index(Request $request)
     {
 
@@ -60,6 +64,33 @@ class ContaController extends Controller
         $conta->descricao = $validated_data['descricao'];
         $conta->save();
         return redirect()->route('contas');
+
+    }
+
+
+    public function destroy(Conta $conta){
+
+    	$oldName = $conta->nome;
+        try {
+            $conta->delete();
+            return redirect()->route('contas')
+                ->with('alert-msg', 'Curso "' . $curso->nome . '" foi apagado com sucesso!')
+                ->with('alert-type', 'success');
+        } catch (\Throwable $th) {
+            // $th é a exceção lançada pelo sistema - por norma, erro ocorre no servidor BD MySQL
+            // Descomentar a próxima linha para verificar qual a informação que a exceção tem
+            //dd($th, $th->errorInfo);
+
+            if ($th->errorInfo[1] == 1451) {   // 1451 - MySQL Error number for "Cannot delete or update a parent row: a foreign key constraint fails (%s)"
+                return redirect()->route('contas')
+                    ->with('alert-msg', 'Não foi possível apagar o Curso "' . $oldName . '", porque este curso já está em uso!')
+                    ->with('alert-type', 'danger');
+            } else {
+                return redirect()->route('contas')
+                    ->with('alert-msg', 'Não foi possível apagar o Curso "' . $oldName . '". Erro: ' . $th->errorInfo[2])
+                    ->with('alert-type', 'danger');
+            }
+        }
 
     }
 }

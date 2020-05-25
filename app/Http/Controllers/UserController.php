@@ -46,7 +46,7 @@ class UserController extends Controller
     }
 
     public function perfil(){
-        return view('users.perfil')->withUser('user',Auth::user());
+        return view('users.perfil')->with('user',Auth::user());
     }
 
     public function update_perfil(PerfilPost $request, User $user){
