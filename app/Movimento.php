@@ -9,7 +9,7 @@ class Movimento extends Model
 
 	//Use SoftDelete;
 	public function conta(){
-		return $this->belongTo('App\Conta');
+		return $this->belongTo('App\Conta','conta_id','id');
 	}
 
 

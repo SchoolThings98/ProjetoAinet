@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Conta;
+use App\Movimento;
 use App\Http\Requests\ContaPost;
+use Auth;
 
 class ContaController extends Controller
 {
     public function index(Request $request)
     {
 
-    	$qry = Conta::where('id','>=','0');
+    	$qry = Conta::where('user_id',Auth::user()->id);
     	$todasAsContas = $qry->paginate(10);
         return view('contas.index')->with('contas',$todasAsContas);
     }
@@ -29,11 +31,21 @@ class ContaController extends Controller
             		->withConta($conta);
     }
 
+
+    public function info(Conta $conta){
+
+    	$movimentosConta = $conta->movimentos()->orderBy('data','desc')->paginate(10);
+     	return view('contas.conta-info')->withConta($conta)
+    									->with('movimentos', $movimentosConta);
+    }
+
     public function store(ContaPost $request){
     	$validated_data = $request->validated();
     	$conta= new Conta;
         $conta->nome = $validated_data['nome'];
         $conta->saldo_abertura = $validated_data['saldo_abertura'];
+        $conta->descricao = $validated_data['descricao'];
+        $conta->user_id = Auth::user()->id;
         $conta->save();
         return redirect()->route('contas');
 
@@ -45,6 +57,7 @@ class ContaController extends Controller
     	$validated_data = $request->validated();
     	$conta->nome = $validated_data['nome'];
         $conta->saldo_abertura = $validated_data['saldo_abertura'];
+        $conta->descricao = $validated_data['descricao'];
         $conta->save();
         return redirect()->route('contas');
 
