@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	
+
 
 <title>Gestor Finanças</title>
 <link rel="stylesheet" href="/css/estilos.css">
@@ -84,6 +84,10 @@
                 <li>
                     <i class="fab fa-wpforms"></i>
                     <a href="{{route('perfil')}}">Perfil</a>
+                </li>
+                <li>
+                    <i class="fab fa-wpforms"></i>
+                    <a href="{{route('estatistica')}}">Estatisticas</a>
                 </li>
             </ul>
         </nav>
