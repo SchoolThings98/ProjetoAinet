@@ -24,7 +24,7 @@
             <td>{{ $conta->nome }} </td>
             <td>{{ $conta->data_ultimo_movimento ?? '' }} </td>
             <td>{{$conta->saldo_atual}}</td>
-            <td><a href="{{route('contas.edit',['conta' => $conta])}}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Editar Conta</a></td></td> 
+            <td><a href="{{route('contas.edit',['conta' => $conta])}}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Editar Conta</a></td></td>
             <td><a href="{{route('contas.info',['conta' => $conta])}}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Informação sobre a Conta</td>
         </tr>
     @endforeach

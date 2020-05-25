@@ -21,7 +21,7 @@ class MovimentoController extends Controller
             $qry->where('name','like','%'.$request->query('name').'%');
         }
         if($request->has('email')){
-            $qry->where('email',$request->query('email'));  
+            $qry->where('email',$request->query('email'));
         }*/
 
         /*if (request()->query('tipo')) {
@@ -60,7 +60,7 @@ class MovimentoController extends Controller
     public function edit(Movimento $movimento)
     {
 
-        return view('movimentos.edit')->withMovimento($movimento);   
+        return view('movimentos.edit')->withMovimento($movimento);
     }
 
     public function update(UpdateMovimento $request, Movimento $movimento){
