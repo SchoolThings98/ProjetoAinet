@@ -33,6 +33,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Movimentos
 Route::get('/movimentos', 'MovimentoController@index')->name('movimentos')->middleware('auth');
+Route::get('/movimentos/{movimento}/create', 'MovimentoController@create')->name('movimentos.create');
 Route::get('/movimentos/{movimento}/edit', 'MovimentoController@edit')->name('movimentos.edit');
 Route::put('/movimentos/{movimento}', 'MovimentoController@update')->name('movimentos.update');
 
@@ -46,5 +47,9 @@ Route::put('contas/{conta}', 'ContaController@update')->name('contas.update');
 Route::get('/contas/{conta}/info', 'ContaController@info')->name('contas.info');
 
 
+
 //Estatisticas
 Route::get('/estatistica', 'EstatisticaController@index')->name('estatistica')->middleware('auth');
+
+Route::get('/contas/{conta}/info', 'ContaController@info')->name('contas.info');
+
