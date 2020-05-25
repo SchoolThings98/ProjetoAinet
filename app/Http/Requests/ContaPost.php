@@ -25,7 +25,8 @@ class ContaPost extends FormRequest
     {
         return [
             'nome'=> 'required|string|max:20',
-            'saldo_abertura'=> 'required|integer'
+            'saldo_abertura'=> 'required|integer',
+            'descricao' => 'nullable|string'
         ];
     }
 }

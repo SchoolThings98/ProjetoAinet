@@ -34,13 +34,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/movimentos', 'MovimentoController@index')->name('movimentos')->middleware('auth');
 
 
-<<<<<<< HEAD
 //Contas
 Route::get('/contas','ContaController@index')->name('contas')->middleware('auth');
 Route::get('/contas/create', 'ContaController@create')->name('contas.create');
 Route::post('/contas', 'ContaController@store')->name('contas.store');
 Route::get('/contas/{conta}/edit', 'ContaController@edit')->name('contas.edit');
 Route::put('contas/{conta}', 'ContaController@update')->name('contas.update');
-
-=======
->>>>>>> 577c8dd76787ff3a7b006c1993096625954d225c
+Route::get('/contas/{conta}/info', 'ContaController@info')->name('contas.info');

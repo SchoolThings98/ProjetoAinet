@@ -10,7 +10,7 @@ class Conta extends Model
 
     
     public function movimentos(){
-    	return $this->hasMany('App\Movimento');
+    	return $this->hasMany('App\Movimento','conta_id','id');
     }
         
     public $timestamps = false;

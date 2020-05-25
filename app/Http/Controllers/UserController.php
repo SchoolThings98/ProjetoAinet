@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Http\Requests\UserPost;
 use App\Http\Requests\PerfilPost;
+use Auth;
 
 class UserController extends Controller
 {
@@ -45,7 +46,7 @@ class UserController extends Controller
     }
 
     public function perfil(){
-        return view('users.perfil');
+        return view('users.perfil')->withUser('user',Auth::user());
     }
 
     public function update_perfil(PerfilPost $request, User $user){
