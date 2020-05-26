@@ -16,13 +16,28 @@ class MovimentoController extends Controller
 	public function index(Request $request)
 	{
 
+        $categoria = $request->categoria ?? '';
+        $conta = $request->conta ?? '';
+
         $qry = Movimento::where('id','>=','0');
-        $conta_id = $request->conta_id;
-        $qry = Movimento::query();
-        $qry->where('conta_id',$conta_id);
-        $contas = Conta::where('user_id',Auth::user()->id);
+
+        if($conta){
+            $qry->where('conta_id',$request->query('conta'));
+        }
+        if($categoria){
+            $qry->where('categoria_id',$request->query('categoria'));
+        }
+        if($request->has('tipo')){
+            $qry->where('tipo',$request->query('tipo'));
+        }
+        $contas = Conta::where('user_id',Auth::user()->id)->pluck('id','nome');
+        $categorias = Categoria::pluck('id', 'nome');
     	$todosMovimentos = $qry->paginate(30);
-        return view('movimentos.index')->with('movimentos',$todosMovimentos)->with('contas', $contas);
+        return view('movimentos.index')->with('movimentos',$todosMovimentos)
+                                       ->withContas($contas)
+                                       ->withCategorias($categorias)
+                                       ->withSelectedCategoria($categoria)
+                                       ->withSelectedConta($conta);
 
 	}
 

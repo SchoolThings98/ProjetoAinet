@@ -4,25 +4,36 @@
 <h3>Lista de Movimentos:</h3>
 <form method="GET" action="{{route('movimentos')}}">
 	@csrf
-<div>
-  <select class="custom-select" name="conta_id" id="inputConta" aria-label="Conta">
-    @foreach ($contas as $conta)
-    <option value={{$conta}}>{{$conta->nome}}</option>
-    @endforeach
-  </select>
-</div>
+  <div>
+    <p>Contas</p>
+        <select class="custom-select" name="conta" id="inputConta" aria-label="Conta:">
+                <option value="" {{'' == old('conta', $selectedConta) ? 'selected' : ''}}>Todas as contas</option>
+        @foreach ($contas as $nome => $id)
+          <option value={{$id}} {{$id == old('conta', $selectedCategoria) ? 'selected' : ''}}>{{$nome}}</option>
+        @endforeach
+      </select>
+  </div>
 	<div>
 		<p>Pesquisar por Categoria</p>
-         <input type="text" name="nome">
+        <select class="custom-select" name="categoria" id="inputCategoria" aria-label="Categotia:">
+                <option value="" {{'' == old('categoria', $selectedCategoria) ? 'selected' : ''}}>Todas as categorias</option>
+                <option value="" {{'' == old('departamento', $selectedCategoria) ? 'selected' : ''}}>Sem categoria</option>
+        @foreach ($categorias as $nome => $id)
+          <option value={{$id}} {{$id == old('categoria', $selectedCategoria) ? 'selected' : ''}}>{{$nome}}</option>
+        @endforeach
+      </select>
 	</div>
 	<div>
 	 	<p>Pesquisar por Tipo</p>
-	 	<input type="text" name="tipo">
+	 	<input type="radio" name="tipo" id="receita" value="R">
+    <label for="receita">Receita</label>
+    <input type="radio" name="tipo" id="despesa" value="D">
+    <label for="despesa">Despesa</label>
 	 </div>
      <button type="submit">Pesquisar</button>
 </form>
 
-<<div class="row mb-3">
+<div class="row mb-3">
    <a  href="{{route('movimentos.create',['movimento' => $movimentos])}}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Adicionar Movimento</a>
 </div>
 <table>
@@ -48,36 +59,11 @@
         <td> {{$movimento->tipo}} </td>
         <td><a href="{{route('movimentos.edit',['movimento' => $movimento])}}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Editar Movimento</a></td>
         <td>
-          <!-- Ferramentas -->
-        {{--   @can('update', $movimento)
-          <div data-widget="tree">
-            <div class="treeview">
-              <a href="#" class=""><i class="fas fa-tools"></i></a>
-              <ul class="treeview-menu">
-                <a class="btn btn-xs btn-primary custom" href="{{route('movimentos.edit', $movimento->id) }}"><i class="far fa-edit"></i> Editar</a>
-                <br>
-                @endcan
-
-                @can('delete', $movimento)
-                <form action="{{route('movimentos.destroy', $movimento->id) }}" method="POST" role="form" class="inline">
-                  @csrf
-                  @method('DELETE')
-                  <input type="hidden" name="id" value="{{ $movimento->id }}}">
-                  <br>
-                  <button type="submit" class="btn btn-xs btn-danger custom"><i class="fas fa-trash"></i> Eliminar</button>
-                </form>
-                @endcan
-                @can('update', $movimento)
-              </ul>
-            </div>
-          </div>
-          @endcan --}}
-          <!-- Ferramentas -->
         </td>
       </tr>
       @endforeach
     </tbody>
 </table>
 {{-- paginação  --}}
-<div><a>{{$movimentos->links()}}</a></div>
+<div>{{$movimentos->links()}}</div>
 @endsection

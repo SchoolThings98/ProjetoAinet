@@ -49,6 +49,7 @@ class ContaController extends Controller
         $conta->nome = $validated_data['nome'];
         $conta->saldo_abertura = $validated_data['saldo_abertura'];
         $conta->descricao = $validated_data['descricao'];
+        $conta->saldo_atual = $validated_data['saldo_abertura'];
         $conta->user_id = Auth::user()->id;
         $conta->save();
         return redirect()->route('contas');
@@ -72,6 +73,8 @@ class ContaController extends Controller
 
     	$oldName = $conta->nome;
         try {
+        	$todosMovimentos = Movimento::where('conta_id',$conta->id);
+        	//$todosMovimentos->delete();
             $conta->delete();
             return redirect()->route('contas')
                 ->with('alert-msg', 'Curso "' . $curso->nome . '" foi apagado com sucesso!')
