@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Conta;
 use App\Movimento;
+use App\Categoria;  
 use App\Http\Requests\ContaPost;
 use Auth;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -36,11 +37,23 @@ class ContaController extends Controller
     }
 
 
-    public function info(Conta $conta){
+    public function info(Request $request, Conta $conta){
+        $categoria = $request->categoria ?? '';
+        $qry = $conta->movimentos();
 
-    	$movimentosConta = $conta->movimentos()->orderBy('data','desc')->paginate(10);
+        if($request->categoria === "sem_categoria")  
+            $qry->whereNull('categoria_id');
+        elseif($request->categoria !== "todas") 
+            $qry->where('categoria_id',$request->query('categoria'));;
+        if($request->has('tipo')){
+            $qry->where('tipo',$request->query('tipo'));
+        }
+        $categorias = Categoria::pluck('id', 'nome');
+    	$movimentosConta = $qry->orderBy('data','desc')->paginate(10);
      	return view('contas.conta-info')->withConta($conta)
-    									->with('movimentos', $movimentosConta);
+    									->with('movimentos', $movimentosConta)
+                                        ->withCategorias($categorias)
+                                        ->withSelectedCategoria($categoria);
     }
 
     public function store(ContaPost $request){
