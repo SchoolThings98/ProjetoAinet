@@ -29,7 +29,7 @@
         <select class="custom-select" name="categoria" id="inputCategoria" aria-label="Categotia:">
                 <option value="todas" {{'' == old('categoria', $selectedCategoria) ? 'selected' : ''}}>Todas as categorias</option>
                 <option value="sem_categoria" {{'' == old('departamento', $selectedCategoria) ? 'selected' : ''}}>Sem categoria</option>
-        @foreach ($categorias as $nome => $id)
+        @foreach ($categorias as $id => $nome)
           <option value={{$id}} {{$id == old('categoria', $selectedCategoria) ? 'selected' : ''}}>{{$nome}}</option>
         @endforeach
       </select>

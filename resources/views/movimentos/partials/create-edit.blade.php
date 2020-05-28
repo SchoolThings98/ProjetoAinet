@@ -10,42 +10,37 @@
     </div>
     <div class="form-group">
         <label for="inputValor">Valor do Movimento</label>
-        <input
-            type="number" class="form-control"
-            name="valor" id="inputValor"
-            value="{{ old('valor'), $movimento->valor}}" />
+        <input type="text" class="form-control" name="valor" id="inputValor" value="{{old('valor', $movimento->valor )}}" >
             @if ($errors->has('valor'))
                 <strong><em>{{ $errors->first('valor') }}</em></strong>
             @endif
     </div>
     <div class="form-group">
-        <label for="inputTipo">Tipo de Movimento</label>
-        <select name="tipo" id="inputTipo" class="form-control">
-            <option disabled selected> -- select an option -- </option>
-            <option {{ old('tipo',$movimento->tipo) == 'D' ?"selected":"" }} value="D">Despesa</option>
-            <option {{ old('tipo',$movimento->tipo) == 'R' ?"selected":"" }} value="R">Receita</option>
-        </select>
+       <input type="radio" name="tipo" id="receita" value="R" {{old('tipo',  $movimento->tipo) == 'R' ? 'checked' : ''}}>
+       <label for="receita">Receita</label>
+       <input type="radio" name="tipo" id="despesa" value="D" {{old('tipo',  $movimento->tipo) == 'D' ? 'checked' : ''}}>
+       <label for="despesa">Despesa</label>
         @if ($errors->has('tipo'))
             <strong><em>{{ $errors->first('tipo') }}</em></strong>
         @endif
     </div>
     <div class="form-group">
-        <label for="inputCategoria">ID da Categoria</label>
-        <input
-            type="number" class="form-control"
-            name="categoria_id" id="inputCategoria"
-            value="{{ old('categoria_id',$movimento->categoria_id) }}" />
+       <select class="custom-select" name="categoria_id" id="inputCategoria" aria-label="Categotia:">
+
+            @foreach ($categorias as $id => $nome)
+                <option value={{$id}} {{$id == old('categoria', $movimento->categoria_id) ? 'selected' : ''}}>{{$nome}}</option>
+            @endforeach
+      </select>
             @if ($errors->has('categoria_id'))
                 <strong><em>{{ $errors->first('categoria_id') }}</em></strong>
             @endif
     </div>
     <div class="form-group">
-        <label for="inputDescricao">Descrição do Movimento</label>
-        <input
-            type="text" class="form-control"
-            name="descricao" id="inputDescricao"
-            placeholder="Descrição do Movimento" value="{{ old('descricao',$movimento->descricao) }}" />
-            @if ($errors->has('descricao'))
-                <strong><em>{{ $errors->first('descricao') }}</em></strong>
-            @endif
+        <div>
+            <label for="inputDescricao">Descrição do Movimento</label>
+        </div>
+        <textarea class="form-control" name="descricao" id="desc" rows=10>{{old('descricao', $movimento->descricao)}}</textarea>
+        @if ($errors->has('descricao'))
+            <strong><em>{{ $errors->first('descricao') }}</em></strong>
+        @endif
     </div>

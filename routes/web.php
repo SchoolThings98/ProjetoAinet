@@ -32,11 +32,11 @@ Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 
 //Movimentos
-Route::get('/movimentos', 'MovimentoController@index')->name('movimentos')->middleware('auth');
-Route::get('/movimentos/create', 'MovimentoController@create')->name('movimentos.create');
-Route::get('/movimentos/{movimento}/edit', 'MovimentoController@edit')->name('movimentos.edit');
-Route::put('/movimentos/{movimento}', 'MovimentoController@update')->name('movimentos.update');
-
+//Route::get('/movimentos', 'MovimentoController@index')->name('movimentos')->middleware('auth');
+Route::get('/contas/movimentos/create', 'MovimentoController@create')->name('movimentos.create');
+Route::get('/contas/movimentos/{movimento}/edit', 'MovimentoController@edit')->name('movimentos.edit');
+Route::put('/contas/movimentos/{movimento}', 'MovimentoController@update')->name('movimentos.update');
+Route::post('/contas/movimentos', 'MovimentoController@store')->name('movimentos.store');
 
 //Contas
 Route::get('/contas','ContaController@index')->name('contas')->middleware('auth');

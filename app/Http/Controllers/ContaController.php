@@ -48,7 +48,7 @@ class ContaController extends Controller
         if($request->has('tipo')){
             $qry->where('tipo',$request->query('tipo'));
         }
-        $categorias = Categoria::pluck('id', 'nome');
+        $categorias = Categoria::pluck('nome', 'id');
     	$movimentosConta = $qry->orderBy('data','desc')->paginate(10);
      	return view('contas.conta-info')->withConta($conta)
     									->with('movimentos', $movimentosConta)

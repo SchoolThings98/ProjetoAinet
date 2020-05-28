@@ -14,7 +14,7 @@ class UpdateMovimento extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,7 +26,7 @@ class UpdateMovimento extends FormRequest
     {
         return [
             'data' => 'required|date_format:"Y-m-d"|before_or_equal:today',
-            'valor' => 'required|integer',
+            'valor' => 'required|numeric',
             'tipo' => 'required|in:D,R',
             'categoria_id' => 'nullable|integer|digits_between:1,43',
             'descricao' => 'nullable|string',

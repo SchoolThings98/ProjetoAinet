@@ -78,10 +78,6 @@
                     <a href={{route('contas')}}>Contas</a>
                 </li>
                 <li>
-                    <i class="fas fa-users"></i>
-                    <a href="{{ route('movimentos')}}">Movimentos</a>
-                </li>
-                <li>
                     <i class="fab fa-wpforms"></i>
                     <a href="{{route('perfil')}}">Perfil</a>
                 </li>

@@ -23,6 +23,11 @@ class Movimento extends Model
     	return $this->belongsTo('App\Categoria', 'categoria_id', 'id');
     }
 
+    /*public function getUpdatedAtColumn() {
+        return null;
+    }*/
+
+    public $timestamps = false;
     public function tipoToString()
     {
     	switch ($this->tipo){

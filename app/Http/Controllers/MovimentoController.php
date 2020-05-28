@@ -43,17 +43,21 @@ class MovimentoController extends Controller
 
     public function create(){
         $novoMovimento = new Movimento;
-        return view('movimentos.create')->withMovimento($novoMovimento);
+        $categorias = Categoria::pluck('nome', 'id');
+        return view('movimentos.create')->withMovimento($novoMovimento)
+                                        ->withCategorias($categorias);
     }
 
     public function edit(Movimento $movimento)
     {
-
-        return view('movimentos.edit')->withMovimento($movimento);
+        $categorias = Categoria::pluck('nome', 'id');
+        return view('movimentos.edit')->withMovimento($movimento)
+                                      ->withCategorias($categorias);
     }
 
-    public function store(MovimentoPost $request){
+    public function store(UpdateMovimento $request, Conta $conta){
         $validated_data = $request->validated();
+        $movimento = new Movimento;
         $movimento->data = $validated_data['data'];
         $movimento->valor = $validated_data['valor'];
         $movimento->tipo = $validated_data['tipo'];
@@ -71,9 +75,11 @@ class MovimentoController extends Controller
         $movimento->categoria_id = $validated_data['categoria_id'];
         $movimento->descricao = $validated_data['descricao'];
         $movimento->save();
-        return redirect()->route('movimentos');
+        return redirect()->route('contas');
     }
 
+
+/*
      public function destroy($id)
     {
         $this->authorize('delete', Movimento::findOrFail($id));
@@ -88,6 +94,6 @@ class MovimentoController extends Controller
         $movimentoModel['confirmado'] = '1';
         $movimentoModel->save();
         return redirect()->action('MovimentoController@index')->with('status', 'Movimento confirmado com sucesso!');
-    }
+    }*/
 }
 
