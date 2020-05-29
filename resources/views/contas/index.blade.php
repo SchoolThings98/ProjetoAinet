@@ -1,6 +1,5 @@
 @extends('layout')
 @section('content')
-
 <h1 class= "text-align">Contas</h1>
 <h3>Lista de Contas:</h3>
 
@@ -27,15 +26,17 @@
             <td><a href="{{route('contas.edit',['conta' => $conta])}}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Editar Conta</a></td></td>
             <td><a href="{{route('contas.info',['conta' => $conta])}}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Informação sobre a Conta</td>
             <td>
-               	<form action="{{route('contas.destroy', ['conta' => $conta]) }}" method="POST">
+                <form action="{{route('contas.destroy', ['conta' => $conta]) }}" method="POST">
                         @csrf
                         @method("DELETE")
                    	<input type="submit" class="btn btn-danger btn-sm" value="Apagar">
                 </form>
             </td>
+
         </tr>
     @endforeach
     </tbody>
+
 </table>
 
 

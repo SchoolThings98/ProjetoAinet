@@ -3,11 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Movimento extends Model
 {
 
-	//Use SoftDelete;
+	use SoftDeletes;
 	public function conta(){
 		return $this->belongTo('App\Conta','conta_id','id');
 	}
@@ -23,9 +24,10 @@ class Movimento extends Model
     	return $this->belongsTo('App\Categoria', 'categoria_id', 'id');
     }
 
-    /*public function getUpdatedAtColumn() {
+/*    public function getUpdatedAtColumn() {
         return null;
     }*/
+
 
     public $timestamps = false;
     public function tipoToString()
