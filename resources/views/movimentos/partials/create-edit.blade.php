@@ -26,9 +26,9 @@
     </div>
     <div class="form-group">
        <select class="custom-select" name="categoria_id" id="inputCategoria" aria-label="Categotia:">
-
+            <option value=" " {{'' == old('categoria_id', $movimento->categoria_id) ? 'selected' : ''}}>Sem categoria</option>
             @foreach ($categorias as $id => $nome)
-                <option value={{$id}} {{$id == old('categoria', $movimento->categoria_id) ? 'selected' : ''}}>{{$nome}}</option>
+                <option value={{$id}} {{$id == old('categoria_id', $movimento->categoria_id) ? 'selected' : ''}}>{{$nome}}</option>
             @endforeach
       </select>
             @if ($errors->has('categoria_id'))
@@ -43,4 +43,8 @@
         @if ($errors->has('descricao'))
             <strong><em>{{ $errors->first('descricao') }}</em></strong>
         @endif
+    </div>
+    <div class="form-group">
+        <label for="inputFoto">Upload do documento</label>
+        <input type="file" class="form-control" name="imagem_doc" id="inputFoto">
     </div>

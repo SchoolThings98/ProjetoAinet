@@ -9,10 +9,12 @@ use App\User;
 use App\Http\Requests\UpdateMovimento;
 use Auth;
 use App\Conta;
+use Storage;
 
 class MovimentoController extends Controller
 {
 
+    
 	public function index(Request $request)
 	{
 
@@ -41,11 +43,12 @@ class MovimentoController extends Controller
 
 	}
 
-    public function create(){
+    public function create(Conta $conta){
         $novoMovimento = new Movimento;
         $categorias = Categoria::pluck('nome', 'id');
         return view('movimentos.create')->withMovimento($novoMovimento)
-                                        ->withCategorias($categorias);
+                                        ->withCategorias($categorias)
+                                        ->withConta($conta);
     }
 
     public function edit(Movimento $movimento)
@@ -58,13 +61,17 @@ class MovimentoController extends Controller
     public function store(UpdateMovimento $request, Conta $conta){
         $validated_data = $request->validated();
         $movimento = new Movimento;
+        $movimento->conta_id = $conta->id; 
         $movimento->data = $validated_data['data'];
         $movimento->valor = $validated_data['valor'];
+        $movimento->saldo_inicial = $conta->saldo_atual;
+        $movimento->saldo_final = $validated_data['tipo'] == 'R' ? $conta->saldo_atual + $validated_data['valor'] : $conta->saldo_atual - $validated_data['valor'];
+        $conta->saldo_atual = $movimento->saldo_final;
         $movimento->tipo = $validated_data['tipo'];
         $movimento->categoria_id = $validated_data['categoria_id'];
         $movimento->descricao = $validated_data['descricao'];
         $movimento->save();
-        return redirect()->route('movimentos');
+        return redirect()->route('contas');
     }
 
     public function update(UpdateMovimento $request, Movimento $movimento){
@@ -74,8 +81,19 @@ class MovimentoController extends Controller
         $movimento->tipo = $validated_data['tipo'];
         $movimento->categoria_id = $validated_data['categoria_id'];
         $movimento->descricao = $validated_data['descricao'];
+        $path = $validated_data['imagem_doc']->store('/doc');
+        $movimento->imagem_doc = $path;
         $movimento->save();
         return redirect()->route('contas');
+    }
+
+    public function displayDoc(Movimento $movimento)
+    {
+        if ( isset($movimento->imagem_doc) ) {
+            return Storage::disk('local')->response("docs/" . $movimento->imagem_doc);
+        }else{
+            return response('Ficheiro não encontrado');
+        }
     }
 
 

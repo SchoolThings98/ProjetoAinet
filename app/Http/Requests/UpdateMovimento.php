@@ -28,7 +28,8 @@ class UpdateMovimento extends FormRequest
             'data' => 'required|date_format:"Y-m-d"|before_or_equal:today',
             'valor' => 'required|numeric',
             'tipo' => 'required|in:D,R',
-            'categoria_id' => 'nullable|integer|digits_between:1,43',
+            'categoria_id' => 'nullable',
+            'imagem_doc'=>'nullable',
             'descricao' => 'nullable|string',
         ];
     }
