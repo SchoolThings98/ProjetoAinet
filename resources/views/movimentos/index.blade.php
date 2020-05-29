@@ -58,8 +58,6 @@
         <td> {{ is_null($movimento->categoriaRef) ? '' : $movimento->categoriaRef->nome}}</td>
         <td> {{$movimento->tipo}} </td>
         <td><a href="{{route('movimentos.edit',['movimento' => $movimento])}}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Editar Movimento</a></td>
-        <td>
-        </td>
       </tr>
       @endforeach
     </tbody>

@@ -15,7 +15,7 @@
             <td>{{ $conta->nome }} </td>
             <td>{{ $conta->data_ultimo_movimento ?? '' }} </td>
             <td>{{$conta->saldo_atual}}</td>
-            <td><a href="{{route('contas.edit',['conta' => $conta])}}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Editar Conta</a></td></td> 
+            <td><a href="{{route('contas.edit',['conta' => $conta])}}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Editar Conta</a></td></td>
         </tr>
     </tbody>
 </table>
@@ -28,7 +28,7 @@
         <p>Pesquisar por Categoria</p>
         <select class="custom-select" name="categoria" id="inputCategoria" aria-label="Categotia:">
                 <option value="todas" {{'' == old('categoria', $selectedCategoria) ? 'selected' : ''}}>Todas as categorias</option>
-                <option value="sem_categoria" {{'' == old('departamento', $selectedCategoria) ? 'selected' : ''}}>Sem categoria</option>
+                <option value="sem_categoria" {{'' == old('categoria', $selectedCategoria) ? 'selected' : ''}}>Sem categoria</option>
         @foreach ($categorias as $id => $nome)
           <option value={{$id}} {{$id == old('categoria', $selectedCategoria) ? 'selected' : ''}}>{{$nome}}</option>
         @endforeach
@@ -44,7 +44,7 @@
      <button type="submit">Pesquisar</button>
 </form>
 <div class="row mb-3">
-   <a  href="{{route('movimentos.create',['movimento' => $movimentos],['conta' => $conta])}}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Adicionar Movimento</a>
+   <a  href="{{route('movimentos.create',['conta' => $conta])}}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Adicionar Movimento</a>
 </div>
 <table>
     <thead>
@@ -56,6 +56,7 @@
             <th>Saldo Final</th>
             <th>Categorias</th>
             <th>Tipo</th>
+            <th>Documento</th>
         </tr>
     </thead>
    	<tbody>
@@ -67,10 +68,17 @@
             	<td>{{$movimento->saldo_inicial}}</td>
                 <td>{{$movimento->saldo_final}}</td>
                 <td>{{ is_null($movimento->categoriaRef) ? '' : $movimento->categoriaRef->nome}}</td>
-                <td>{{$movimento->tipo}}</td>
+                <td>{{$movimento->tipo_name}}</td>
+
+                <td>
+                     @if ( isset($movimento->imagem_doc) )
+                    <a href="{{route('movimentos.doc',$movimento)}}" class="btn btn-xs btn-primary">Ver Documento </a>
+                    @endif
+                </td>
+
                 <td><a href="{{route('movimentos.edit',['movimento' => $movimento])}}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Editar Movimento</a></td>
         	</tr>
-        @endforeach	
+        @endforeach
     </tbody>
 </table>
 

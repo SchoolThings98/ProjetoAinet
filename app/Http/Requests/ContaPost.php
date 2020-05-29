@@ -3,9 +3,12 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ContaPost extends FormRequest
 {
+
+    use SoftDeletes;
     /**
      * Determine if the user is authorized to make this request.
      *
