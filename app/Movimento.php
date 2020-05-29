@@ -28,16 +28,25 @@ class Movimento extends Model
     }*/
 
     public $timestamps = false;
-    public function tipoToString()
+    public function getTipoNameAttribute()
     {
-    	switch ($this->tipo){
-    		case 'D':
-    			return 'Despesa';
-    		case 'R':
-    			return 'Receita';
-    	}
-    	return '';
+        switch ($this->tipo){
+            case 'D':
+                return 'Despesa';
+            case 'R':
+                return 'Receita';
+        }
     }
 
-    
+  /*   public function getCategoriaNameAttribute()
+    {
+        switch ($this->tipo){
+            case 'D':
+                return ;
+            case 'R':
+                return 'Receita';
+        }
+    }
+ */
+
 }
