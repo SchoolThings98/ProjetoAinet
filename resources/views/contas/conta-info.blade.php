@@ -1,6 +1,7 @@
 @extends('layout')
 @section('content')
 <h1 class= "text-align">Informação de conta</h1>
+
 <table>
     <thead>
         <tr>
@@ -16,6 +17,26 @@
             <td>{{ $conta->data_ultimo_movimento ?? '' }} </td>
             <td>{{$conta->saldo_atual}}</td>
             <td><a href="{{route('contas.edit',['conta' => $conta])}}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Editar Conta</a></td></td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Lista de Autorizações:</h3>
+<table>
+    <thead>
+        <tr>
+            <th>ID Utilizador</th>
+            <th>ID Conta</th>
+            <th>Permissão</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{$conta->user_id }} </td>
+            <td>{{$conta->id}} </td>
+            <td></td>
+            <td><a href="{{route('contas.edit',['conta' => $conta])}}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Editar Permissão</a></td></td>
         </tr>
     </tbody>
 </table>
