@@ -19,5 +19,6 @@ class Conta extends Model
 	public function user(){
     	return $this->belongsToMany('App\User','autorizacoes_contas','conta_id','user_id');
     	//incompleto falta colocar as chaves
-    }	
+    }
+
 }

@@ -28,6 +28,7 @@
                         <li class="nav-item dropdown">
                             <!--<a href="{{ url('/') }}">{{Auth::user()->name}}</a>-->
                             <a>{{Auth::user()->name}}</a>
+                            <img src="{{Auth::user()->foto ? asset('storage/fotos/' . Auth::user()->foto) : asset('img/default_img.png') }}" width="45" height="65">
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"

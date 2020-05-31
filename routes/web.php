@@ -53,6 +53,8 @@ Route::delete('contas/{conta}', 'ContaController@destroy')->name('contas.destroy
 Route::get('/contas/{conta}/info', 'ContaController@info')->name('contas.info');
 
 
+
+
 //Estatisticas
 Route::get('/estatistica', 'EstatisticaController@index')->name('estatistica')->middleware('auth');
 

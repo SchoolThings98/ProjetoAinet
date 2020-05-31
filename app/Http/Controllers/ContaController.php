@@ -54,6 +54,7 @@ class ContaController extends Controller
     									->with('movimentos', $movimentosConta)
                                         ->withCategorias($categorias)
                                         ->withSelectedCategoria($categoria);
+        
     }
 
     public function store(ContaPost $request){

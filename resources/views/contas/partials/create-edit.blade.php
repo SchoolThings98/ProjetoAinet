@@ -18,3 +18,10 @@
         <div class="small text-danger">Tem de ser um valor numerico</div>
     @enderror
 </div>
+<div class="form-group">
+    <label for="Mail">Adicionar Permissão</label>
+    <input type="text" class="form-control" name="email" id="Mail">
+    @error('email')
+        <div class="small text-danger">Tem de inserir um email válido</div>
+    @enderror
+</div>
