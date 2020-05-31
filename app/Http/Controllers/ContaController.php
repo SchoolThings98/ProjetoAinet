@@ -86,10 +86,10 @@ class ContaController extends Controller
 
     	$oldName = $conta->nome;
         try {
-        	$todosMovimentos = Movimento::where('conta_id',$conta->id)->withTrashed()->delete();;
+        	$todosMovimentos = Movimento::where('conta_id',$conta->id)->withTrashed()->delete();
             $conta->delete();
             return redirect()->route('contas')
-                ->with('alert-msg', 'Curso "' . $conta->nome . '" foi apagado com sucesso!')
+                ->with('alert-msg', 'Conta "' . $conta->nome . '" foi apagado com sucesso!')
                 ->with('alert-type', 'success');
         } catch (\Throwable $th) {
             // $th é a exceção lançada pelo sistema - por norma, erro ocorre no servidor BD MySQL
@@ -102,7 +102,7 @@ class ContaController extends Controller
                     ->with('alert-type', 'danger');
             } else {
                 return redirect()->route('contas')
-                    ->with('alert-msg', 'Não foi possível apagar o Curso "' . $oldName . '". Erro: ' . $th->errorInfo[2])
+                    ->with('alert-msg', 'Não foi possível apagar a Conta "' . $oldName . '". Erro: ' . $th->errorInfo[2])
                     ->with('alert-type', 'danger');
             }
         }

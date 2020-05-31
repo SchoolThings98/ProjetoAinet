@@ -7,6 +7,12 @@
    <a  href="{{route('contas.create')}}" class="btn btn-success" role="button" aria-pressed="true">Nova Conta</a>
 </div>
 
+@if (session('alert-msg'))
+<div>
+  {{ session('alert-msg') }}
+</div>
+@endif
+
 <table>
     <thead>
         <tr>

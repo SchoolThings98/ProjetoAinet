@@ -77,6 +77,13 @@
                 </td>
 
                 <td><a href="{{route('movimentos.edit',['movimento' => $movimento])}}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Editar Movimento</a></td>
+                <td>
+                    <form action="{{route('movimentos.destroy', $movimento)}}" method="POST">
+                        @csrf
+                        @method("DELETE")
+                        <input type="submit" class="btn btn-danger btn-sm" value="Apagar">
+                    </form>
+                </td>
         	</tr>
         @endforeach
     </tbody>

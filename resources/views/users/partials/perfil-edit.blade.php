@@ -20,9 +20,9 @@
     <input type="text" class="form-control" name="telefone" id="Telefone" value="{{old('telefone', $user->telefone )}}" >
 </div>
 <div>
-    @if (Route::has('password.request'))
-        <a class="btn btn-link" href="{{ route('password.request') }}">
-            {{ __('Change Password') }}
-       </a>
-  	@endif	
+     <label for="inputFoto">Upload da foto</label>
+    <input type="file" class="form-control" name="foto" id="inputFoto" value ="{{old('foto',$user->foto)}}">
 </div>
+<div>
+    <a href="{{route('perfil.password')}}">Alterar Password</a>
+<div>

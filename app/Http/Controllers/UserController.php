@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Http\Requests\UserPost;
 use App\Http\Requests\PerfilPost;
+use App\Http\Requests\UpdatePassword;
 use Auth;
-
+use Illuminate\Support\Facades\Storage;
 class UserController extends Controller
 {
      public function index(Request $request)
@@ -55,8 +56,26 @@ class UserController extends Controller
         $user->email = $validated_data['email'];
         $user->NIF = $validated_data['NIF'];
         $user->telefone = $validated_data['telefone'];
+        if ($request->hasFile('foto')) {
+            $path = $request->foto->store('public/fotos');
+            $user->foto = basename($path);
+        }
         $user->save();
         return redirect()->route('homepage');
+    }
+
+    public function alterarPassword()
+    {
+        $user = Auth::user();
+        return view('users.alterar-password')->with('user',$user);
+    }
+
+    public function updatePassword(UpdatePassword $request, User $user)
+    {
+        $validated_data=$request->validated();
+        $user->password = Hash::make($validate_data['password_nova']);
+        $user->save();
+        return redirect()->route('perfil');
     }
 
 }

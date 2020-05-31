@@ -26,6 +26,9 @@ Route::put('users/{user}', 'UserController@update')->name('users.update');
 Route::get('/perfil/edit','UserController@perfil')->name('perfil')->middleware('auth');
 Route::put('/perfil/{user}','UserController@update_perfil')->name('perfil.update');
 
+//alterar password
+Route::get('/password', 'UserController@alterarPassword')->name('perfil.password');
+Route::put('/password','UserController@updatePassword')->name('password.update');
 
 Auth::routes(['verify' => true]);
 
@@ -38,6 +41,7 @@ Route::get('/contas/movimentos/{movimento}/edit', 'MovimentoController@edit')->n
 Route::put('/contas/movimentos/{movimento}', 'MovimentoController@update')->name('movimentos.update');
 Route::post('/contas/{conta}/movimentos', 'MovimentoController@store')->name('movimentos.store');
 Route::get('/movimentos/{movimento}/doc', 'MovimentoController@displayDoc')->name('movimentos.doc');
+Route::delete('contas/movimentos/{movimento}', 'ContaController@destroy')->name('movimentos.destroy');
 
 //Contas
 Route::get('/contas','ContaController@index')->name('contas')->middleware('auth');
@@ -51,6 +55,4 @@ Route::get('/contas/{conta}/info', 'ContaController@info')->name('contas.info');
 
 //Estatisticas
 Route::get('/estatistica', 'EstatisticaController@index')->name('estatistica')->middleware('auth');
-
-Route::get('/contas/{conta}/info', 'ContaController@info')->name('contas.info');
 
