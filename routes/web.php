@@ -25,10 +25,11 @@ Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
 Route::put('users/{user}', 'UserController@update')->name('users.update');
 Route::get('/perfil/edit','UserController@perfil')->name('perfil')->middleware('auth');
 Route::put('/perfil/{user}','UserController@update_perfil')->name('perfil.update');
+Route::delete('perfil/{user}/foto', 'UserController@destroy_foto')->name('perfil.foto.destroy');
 
 //alterar password
 Route::get('/password', 'UserController@alterarPassword')->name('perfil.password');
-Route::put('/password','UserController@updatePassword')->name('password.update');
+Route::put('/password','UserController@updatePassword')->name('password.alterar');
 
 Auth::routes(['verify' => true]);
 
@@ -41,7 +42,9 @@ Route::get('/contas/movimentos/{movimento}/edit', 'MovimentoController@edit')->n
 Route::put('/contas/movimentos/{movimento}', 'MovimentoController@update')->name('movimentos.update');
 Route::post('/contas/{conta}/movimentos', 'MovimentoController@store')->name('movimentos.store');
 Route::get('/movimentos/{movimento}/doc', 'MovimentoController@displayDoc')->name('movimentos.doc');
-Route::delete('contas/movimentos/{movimento}', 'ContaController@destroy')->name('movimentos.destroy');
+Route::delete('contas/movimentos/{movimento}', 'MovimentoController@destroy')->name('movimentos.destroy');
+Route::delete('contas/movimentos/{movimento}/foto', 'MovimentoController@destroy_doc')->name('movimentos.doc.destroy');
+
 
 //Contas
 Route::get('/contas','ContaController@index')->name('contas')->middleware('auth');

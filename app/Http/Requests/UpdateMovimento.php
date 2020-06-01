@@ -39,7 +39,7 @@ class UpdateMovimento extends FormRequest
         return [
             'data.required' => 'Preecha o camp Data',
             'data.date_format' => 'Formato do campo Data inválido',
-            'data.before_or_equal' => 'Preencha o campo Data com uma data igual ou superior a hoje',
+            'data.before_or_equal' => 'Preencha o campo Data com uma data igual ou inferior a hoje',
             'valor.required' => 'Preencha o campo Valor',
             'tipo.required' => 'Preencha o campo Tipo',
             'tipo.in' => 'Insira um tipo válido'

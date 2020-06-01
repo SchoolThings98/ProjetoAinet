@@ -6,6 +6,7 @@
     <thead>
         <tr>
         	<th>Nome</th>
+            <th>Saldo Aberuta</th>
             <th>Ultimo Movimento</th>
             <th>Saldo Atual</th>
             <th></th>
@@ -14,6 +15,7 @@
    	<tbody>
         <tr>
             <td>{{ $conta->nome }} </td>
+            <td>{{$conta->saldo_abertura}}</td>
             <td>{{ $conta->data_ultimo_movimento ?? '' }} </td>
             <td>{{$conta->saldo_atual}}</td>
             <td><a href="{{route('contas.edit',['conta' => $conta])}}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Editar Conta</a></td></td>

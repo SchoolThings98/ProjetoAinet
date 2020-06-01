@@ -3,11 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Conta extends Model
 {
-
+	use SoftDeletes;
     
     public function movimentos(){
     	return $this->hasMany('App\Movimento','conta_id','id');

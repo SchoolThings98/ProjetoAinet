@@ -70,38 +70,98 @@ class MovimentoController extends Controller
         $movimento->categoria_id = $validated_data['categoria_id'];
         $movimento->descricao = $validated_data['descricao'];
         $data = $validated_data['data'];
-        $todosMovDatasParaAFrente = Movimento::where('data','>',$data)->orderBy('data', 'asc')->get();
-        $todosMovContaDatasParaAFrente= $todosMovDatasParaAFrente->where('conta_id', $conta->id);
+        //$todosMovDatasParaAFrente = Movimento::where('data','>',$data)->orderBy('data', 'asc')->get();
+        //dd($todosMovDatasParaAFrente);
+        //$todosMovContaDatasParaAFrente= $todosMovDatasParaAFrente->where('conta_id', $conta->id);
         //$todosMovContaDatasParaAFrente = Movimento::where(['data','>',$data],['conta_id','=',$conta->id])->orderBy('data', 'asc')->get();
-        $saldo_final =$validated_data['tipo'] == 'R' ? $conta->saldo_atual + $validated_data['valor'] : $conta->saldo_atual - $validated_data['valor'];
-        
-        if($todosMovContaDatasParaAFrente === null){
+        $todosMovContaDatasParaAFrente = Movimento::where('data','>',$data)->where('conta_id',$conta->id)->orderBy('data', 'asc')->get();
+        //dd($todosMovContaDatasParaAFrente->count());
+
+        //rever o algoritmo
+
+        if($todosMovContaDatasParaAFrente->count()==0){
+            //dd("lista vazia");
+            $saldo_final =$validated_data['tipo'] == 'R' ? $conta->saldo_atual + $validated_data['valor'] : $conta->saldo_atual - $validated_data['valor'];
             $movimento->saldo_inicial = $conta->saldo_atual;
             $movimento->saldo_final = $saldo_final;
             $conta->saldo_atual = $saldo_final;
+            $conta->data_ultimo_movimento = $validated_data['data'];
             $movimento->save();
             $conta->save();
                
         }else{
+            $movimentoAnterior = Movimento::where('conta_id',$conta->id)->where('data','<=',$data)->orderBy('data', 'desc')->first();
+            //dd($movimentoAnterior);
+            if($movimentoAnterior == null){
+                $movimento->saldo_inicial = $conta->saldo_abertura;
+                $movimento->saldo_final = $validated_data['tipo'] == 'R' ? $conta->saldo_abertura + $validated_data['valor'] : $conta->saldo_abertura - $validated_data['valor'];
+                $movimento->save();
+                $saldo_final;
+                foreach($todosMovContaDatasParaAFrente as $mov){
+                    $movAnteriorAosParaAlterar = Movimento::where('conta_id',$conta->id)->where('data','<=',$mov->data)->orderBy('data','desc')->orderBy('id','desc')->first();
+                    //dd($movAnterior);
+                    if($movAnteriorAosParaAlterar == null){
+                            //$saldo_MovAnterior = $movAnterior->saldo_final;
+                            $mov->saldo_inicial= $movimento->saldo_final;
+                            $saldo_final = $mov->tipo == 'R' ? $movimento->saldo_final+ $mov->valor : $movimento->saldo_final - $mov->valor;
+                            $mov->saldo_final = $saldo_final;
+                            $conta->saldo_atual = $saldo_final;
+                            $mov->save();
+                            $conta->save();
+                     }else{
 
-            foreach($todosMovContaDatasParaAFrente as $mov){
-                $mov->saldo_inicial= $saldo_final;
-                $saldo_final = $mov->tipo == 'R' ? $saldo_final+ $mov->valor : $saldo_final - $mov->valor;
-                $mov->saldo_final = $saldo_final;
-                $conta->saldo_atual = $saldo_final;
-                $mov->save();
-                $conta->save();
+                            $mov->saldo_inicial = $movAnteriorAosParaAlterar->saldo_final;
+                            $saldo_final=  $mov->tipo == 'R' ? $movAnteriorAosParaAlterar->saldo_final+ $mov->valor : $movAnteriorAosParaAlterar->saldo_final - $mov->valor;
+                            $mov->saldo_final = $saldo_final;
+                            $conta->saldo_atual = $saldo_final;
+                            $mov->save();
+                            $conta->save();
+                     }
+                }
+            }else{
+
+                    $movMesmaData = Movimento::where('conta_id',$conta->id)->where('data','=',$data)->orderBy('id','desc')->first();
+
+                    if($movMesmaData == null){
+                        $movimento->saldo_inicial = $movimentoAnterior->saldo_final;
+                        $movimento->saldo_final = $validated_data['tipo'] == 'R' ? $movimentoAnterior->saldo_final + $validated_data['valor'] : $movimentoAnterior->saldo_final - $validated_data['valor'];
+                        $movimento->save();
+                        $saldo_final;
+                        foreach($todosMovContaDatasParaAFrente as $mov){
+                            $movAnterior = Movimento::where('conta_id',$conta->id)->where('data','<',$mov->data)->orderBy('data','desc')->first();
+                            //dd($movAnterior);
+                            $saldo_MovAnterior = $movAnterior->saldo_final;
+                            $mov->saldo_inicial= $saldo_MovAnterior;
+                            $saldo_final = $mov->tipo == 'R' ? $movAnterior->saldo_final+ $mov->valor : $movAnterior->saldo_final - $mov->valor;
+                            $mov->saldo_final = $saldo_final;
+                            $conta->saldo_atual = $saldo_final;
+                            $mov->save();
+                            $conta->save();
+                        } 
+
+
+
+                    }else{
+                        $movimento->saldo_inicial = $movMesmaData->saldo_final;
+                        $movimento->saldo_final = $validated_data['tipo'] == 'R' ? $movMesmaData->saldo_final + $validated_data['valor'] : $movMesmaData->saldo_final - $validated_data['valor'];
+                        $movimento->save();
+                        $saldo_final;
+                        foreach($todosMovContaDatasParaAFrente as $mov){
+                            $movAnterior = Movimento::where('conta_id',$conta->id)->where('data','=',$mov->data)->orderBy('id','desc')->first();
+                            //dd($movAnterior);
+                            $saldo_MovAnterior = $movAnterior->saldo_final;
+                            $mov->saldo_inicial= $saldo_MovAnterior;
+                            $saldo_final = $mov->tipo == 'R' ? $movAnterior->saldo_final+ $mov->valor : $movAnterior->saldo_final - $mov->valor;
+                            $mov->saldo_final = $saldo_final;
+                            $conta->saldo_atual = $saldo_final;
+                            $mov->save();
+                            $conta->save();
+                        } 
+                    }
             }
 
 
         }
-        /*
-        $movimento->saldo_inicial = $conta->saldo_atual;
-        $movimento->saldo_final = $saldo_final;
-        $conta->saldo_atual = $saldo_final;
-        $movimento->save();
-        $conta->save();
-        */
 
         
 
@@ -138,6 +198,8 @@ class MovimentoController extends Controller
     public function destroy(Movimento $movimento){
 
         $oldId = $movimento->id;
+
+
         try {
             $movimento->delete();
             return redirect()->route('contas')
@@ -159,6 +221,17 @@ class MovimentoController extends Controller
             }
         }
 
+    }
+
+
+     public function destroy_doc(Movimento $movimento)
+    {
+        Storage::delete('doc' . $movimento->imagem_doc);
+        $movimento->imagem_doc = null;
+        $movimento->save();
+        return redirect()->route('movimentos.edit', ['movimento' => $movimento])
+            ->with('alert-msg', 'Documento associado "' . $movimento->id . '" foi removido!')
+            ->with('alert-type', 'success');
     }
 
 

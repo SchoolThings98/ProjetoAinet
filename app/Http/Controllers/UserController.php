@@ -9,6 +9,7 @@ use App\Http\Requests\PerfilPost;
 use App\Http\Requests\UpdatePassword;
 use Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
      public function index(Request $request)
@@ -66,16 +67,27 @@ class UserController extends Controller
 
     public function alterarPassword()
     {
-        $user = Auth::user();
-        return view('users.alterar-password')->with('user',$user);
+       
+        return view('users.alterar-password');
     }
 
-    public function updatePassword(UpdatePassword $request, User $user)
+    public function updatePassword(UpdatePassword $request)
     {
+        $user = Auth::user();
         $validated_data=$request->validated();
-        $user->password = Hash::make($validate_data['password_nova']);
+        $user->password = Hash::make($validated_data['password_nova']);
         $user->save();
         return redirect()->route('perfil');
     }
 
+
+    public function destroy_foto(User $user)
+    {
+        Storage::delete('public/fotos/' . $user->foto);
+        $user->foto = null;
+        $user->save();
+        return redirect()->route('perfil', ['user' => $user])
+            ->with('alert-msg', 'Foto do utilizador "' . $user->name . '" foi removida!')
+            ->with('alert-type', 'success');
+    }
 }

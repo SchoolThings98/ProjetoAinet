@@ -1,7 +1,7 @@
 @extends('layout')
 @section('content')
 
- <form method="POST" action="{{route('password.update', ['user' => $user]) }}" class="form-group">
+ <form method="POST" action="{{route('password.alterar') }}" class="form-group">
     @csrf
     @method('PUT')
     <div>
@@ -15,11 +15,18 @@
         <input
             type="password" class="form-control"
             name="password_nova" id="inputPasswordNova"/>
+    @error('password_nova')
+        <div class="small text-danger">{{$message}}</div>
+    @enderror
+    </div>
     <div>
         <label for="ConfirmarPassword">Confirmar Password</label>
         <input
             type="password" class="form-control"
             name="password_confirmada" id="ConfirmarPassword"/>
+    @error('password_confirmada')
+        <div class="small text-danger">{{$message}}</div>
+    @enderror
     </div>
     <div>
         <button type="submit" class="btn btn-success" name="ok">Confirmar</button>

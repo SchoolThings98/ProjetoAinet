@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Hash;
+use Auth;
 
 class UpdatePassword extends FormRequest
 {
@@ -33,5 +35,16 @@ class UpdatePassword extends FormRequest
                 }
                                 }]
         ];
+    }
+
+     public function messages()
+    {
+        return [
+            'password_nova.required' => 'Insira a password nova',
+            'password_nova.min' => 'Password tem de ter no minimo 8 carateres',
+            'password_nova.same' => 'Password nao coincide',
+            'password_confirmada.required' => 'Tem de inserir a password de comfirmaçao'
+        ];
+
     }
 }

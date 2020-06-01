@@ -30,4 +30,16 @@ class PerfilPost extends FormRequest
             'telefone' => 'required|string|min:6|max:15'            
         ];
     }
+
+     public function messages()
+    {
+        return [
+            'name.required' => 'Tem de inserir um nome',
+            'email.required' => 'Tem de inserir um email',
+            'NIF.requiered' => 'Tem de inserir NIF',
+            'NIF.integer' => 'NIF so pode ter numeros',
+            'telefone.requiered' => 'Tem de inserir u numero de telefone'
+        ];
+
+    }
 }
