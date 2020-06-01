@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Conta;
 use App\Movimento;
-use App\Categoria;  
+use App\Categoria;
 use App\Http\Requests\ContaPost;
 use Auth;
 
@@ -12,7 +12,7 @@ use Auth;
 class ContaController extends Controller
 {
 
-	
+
 
     public function index(Request $request)
     {
@@ -41,20 +41,20 @@ class ContaController extends Controller
         $categoria = $request->categoria ?? '';
         $qry = $conta->movimentos();
 
-        if($request->categoria === "sem_categoria")  
+        if($request->categoria === "sem_categoria")
             $qry->whereNull('categoria_id');
-        elseif($request->categoria !== "todas") 
+        elseif($request->categoria !== "todas")
             $qry->where('categoria_id',$request->query('categoria'));;
         if($request->has('tipo')){
             $qry->where('tipo',$request->query('tipo'));
         }
         $categorias = Categoria::pluck('nome', 'id');
-    	$movimentosConta = $qry->orderBy('data','desc')->paginate(10);
+        $movimentosConta = $qry->orderBy('data','desc')->paginate(10);
      	return view('contas.conta-info')->withConta($conta)
     									->with('movimentos', $movimentosConta)
                                         ->withCategorias($categorias)
                                         ->withSelectedCategoria($categoria);
-        
+
     }
 
     public function store(ContaPost $request){
@@ -68,7 +68,7 @@ class ContaController extends Controller
         $conta->save();
         return redirect()->route('contas');
 
-    	
+
     }
 
 

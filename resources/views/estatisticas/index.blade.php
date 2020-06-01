@@ -5,7 +5,7 @@
 <h3>Situação Financeira:</h3>
 
 <div>
-    <span class="negrito"> Saldo total de todas as suas contas: </span> {{$saldo_total}} euros
+    Saldo total de todas as suas contas: <span class="negrito"> {{$saldo_total}} </span> euros
 </div>
 
 
@@ -31,7 +31,7 @@
 </table>
 <br>
 <br>
-<h4>Receitas e Despesas num detrminado intervalo de Tempo:</h4>
+<h3>Receitas e Despesas num determinado intervalo de Tempo:</h3>
 <br>
 <form method="GET" action="{{route('estatistica')}}">
     @csrf
@@ -40,28 +40,65 @@
 </form>
 <br>
 <span>Intervalo de tempo definido: {{$primeiradata}} - {{$segundadata}}</span>
-<table>
-    <thead>
-        <tr>
-            <th>Intervalo de data</th>
-            <th> Tipo </th>
-            <th> Valor</th>
-            <th>Categoria</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($todosmovimentos as $movimento)
-        <tr>
-            <td> {{$movimento->data}} </td>
-            <td> {{$movimento->tipo_name}} </td>
-            <td> {{$movimento->valor}} </td>
-            <td>{{ is_null($movimento->categoria_id) ? ($movimento->tipo == 'D' ? 'Despesas não classificadas' : 'Receitas não classificadas') : $movimento->categoriaRef->nome}}</td>
-        </tr>
-        @endforeach
-    </tbody>
-    <div><a>{{$todosmovimentos->withQueryString()->links()}}</a></div>
-</table>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Intervalo de data</th>
+                <th> Tipo </th>
+                <th> Valor</th>
+                <th>Categoria</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($todosmovimentos as $movimento)
+            <tr>
+                <td> {{$movimento->data}} </td>
+                <td> {{$movimento->tipo_name}} </td>
+                <td> {{$movimento->valor}} </td>
+                <td>{{ is_null($movimento->categoria_id) ? ($movimento->tipo == 'D' ? 'Despesas não classificadas' : 'Receitas não classificadas') : $movimento->categoriaRef->nome}}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    <div>
+        <a>{{$todosmovimentos->withQueryString()->links()}}</a>
+    </div>
+</div>
+<br>
+{{-- <h3>Media das Receitas e Despesas num mês:</h3>
+<div>
+    <form method="GET" action="{{route('estatistica')}}">
+        @csrf
+        <div class="form-group">
+            <label for="inputData">Mês : </label>
+            <input type="month" class="form-control" name="mes" id="inputData" value="" />
+            @if ($errors->has('seconddate'))
+            <strong><em>{{ $errors->first('seconddate') }}</em></strong>
+            @endif
+        </div>
+        <button type="submit">Pesquisar</button>
+    </form>
 
-{{-- paginação  --}}
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Despesas</th>
+                    <th>Receitas</th>
+                </tr>
+            </thead>
+            <tbody>
 
+                <tr>
+                    <td> {{$mediaD}} </td>
+                    <td> {{$mediaR}} </td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <a>{{$todosmovimentos->withQueryString()->links()}}</a>
+        </div>
+    </div>
+</div> --}}
 @endsection

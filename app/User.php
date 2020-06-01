@@ -40,7 +40,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
 
     public function contas(){
-        return $this->belongsToMany('App\Conta','autorizacoes_contas','user_id','conta_id');
+        return $this->belongsToMany('App\Conta','autorizacoes_contas','user_id','conta_id')->withPivot('so_leitura');
 
     }
 }
