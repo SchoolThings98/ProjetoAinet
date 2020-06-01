@@ -25,16 +25,37 @@ class EstatisticaController extends Controller
         foreach ($qry as $conta) {
             $percentagem += $conta->saldo_atual;
         }
+        if ($request->tipo == 'R') {
+            $todosmovimentos = Movimento::whereBetween('data', [$primeriadata, $segundadata])
+                                ->where('tipo', 'R')
+                                ->paginate(10);
+        }elseif($request->tipo == 'D'){
+            $todosmovimentos = Movimento::whereBetween('data', [$primeriadata, $segundadata])
+                                ->where('tipo', 'D')
+                                ->paginate(10);
+        }
         $todosmovimentos = Movimento::whereBetween('data', [$primeriadata, $segundadata])
                             ->paginate(10);
+      /*  $mes = Movimento::whereMonth('data', '01')->get();
+       $receita = 0;
+       $despesa = 0;
+       $contador = 0;
+       dd($mes);
+       foreach ($mes as $movimento) {
+            $receita += Movimento::where('tipo', 'R')->count();
+            $despesa += Movimento::where('tipo', 'D')->count();
+            $contador += 1;
+        }
+        $mediaR = $receita/$contador;
+        $mediaD = $despesa/$contador; */
         //return view('estatisticas.index',compact('contas', 'saldo_total','numeroMovimentos'));
         return view('estatisticas.index')
             ->with('contas',$todasAsContas)
             ->with('saldo_total', $saldototal)
             ->with('todosmovimentos', $todosmovimentos)
+            // ->with('mediaR', $mediaR)
+            // ->with('mediaD', $mediaD)
             ->with('primeiradata', $primeriadata)
             ->with('segundadata', $segundadata);
     }
-
-
 }

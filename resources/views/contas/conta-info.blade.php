@@ -34,12 +34,14 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>{{$conta->user_id }} </td>
-            <td>{{$conta->id}} </td>
-            <td></td>
-            <td><a href="{{route('contas.edit',['conta' => $conta])}}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Editar Permissão</a></td></td>
-        </tr>
+        @foreach ($conta->user as $user_autorizado)
+            <tr>
+                <td>{{$user_autorizado->name }} </td>
+                <td>{{$conta->id}} </td>
+                <td>{{$user_autorizado->pivot->so_leitura}}</td>
+                <td><a href="{{route('contas.edit',['conta' => $conta])}}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Editar Permissão</a></td></td>
+            </tr>
+        @endforeach
     </tbody>
 </table>
 
