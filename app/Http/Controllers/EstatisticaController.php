@@ -22,20 +22,18 @@ class EstatisticaController extends Controller
                                     ->sum('saldo_atual');
     	$qry = Conta::where('user_id',Auth::user()->id);
     	$todasAsContas = $qry->get();
+      $movimentos = Movimento::whereBetween('data', [$primeriadata, $segundadata]);
         foreach ($qry as $conta) {
             $percentagem += $conta->saldo_atual;
         }
         if ($request->tipo == 'R') {
-            $todosmovimentos = Movimento::whereBetween('data', [$primeriadata, $segundadata])
-                                ->where('tipo', 'R')
-                                ->paginate(10);
+            $movimentos->where('tipo', 'R');
+
         }elseif($request->tipo == 'D'){
-            $todosmovimentos = Movimento::whereBetween('data', [$primeriadata, $segundadata])
-                                ->where('tipo', 'D')
-                                ->paginate(10);
+            $movimentos->where('tipo', 'D');
         }
-        $todosmovimentos = Movimento::whereBetween('data', [$primeriadata, $segundadata])
-                            ->paginate(10);
+
+        $todosmovimentos = $movimentos->paginate(10);
       /*  $mes = Movimento::whereMonth('data', '01')->get();
        $receita = 0;
        $despesa = 0;
