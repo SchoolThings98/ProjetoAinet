@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
-use App\Conta;
-use App\Movimento;
-use App\Categoria;
-use App\Http\Requests\ContaPost;
 use Auth;
+use App\User;
+use App\Conta;
+use App\Categoria;
+use App\Movimento;
+use Illuminate\Http\Request;
+use App\Http\Requests\ContaPost;
+
 
 
 class ContaController extends Controller
@@ -48,6 +50,10 @@ class ContaController extends Controller
         if($request->has('tipo')){
             $qry->where('tipo',$request->query('tipo'));
         }
+        //$user = User::where('id', $request->email);
+        //$dapermissao = $user->$conta->attach($autorizacoes_conta, ['so_leitura' => $so_leitura]);
+        $darpermissao = User::where('email', $request->email)->first();
+        //$darpermissao->contas()->attach($conta->id, ['so_leitura' => $request->oppermissao]);
         $categorias = Categoria::pluck('nome', 'id');
         $movimentosConta = $qry->orderBy('data','desc')->paginate(10);
      	return view('contas.conta-info')->withConta($conta)
@@ -83,7 +89,7 @@ class ContaController extends Controller
     }
 
 
-    public function destroy(Conta $conta){
+     public function destroy(Conta $conta){
 
     	$oldName = $conta->nome;
         try {
